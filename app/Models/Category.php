@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['name_en', 'name_ar', 'logo', 'url'])]
-class Brand extends Model
+#[Fillable(['name_en', 'name_ar'])]
+class Category extends Model
 {
     use HasFactory, SoftDeletes;
 

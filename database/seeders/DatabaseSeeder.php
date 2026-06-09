@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
             Development\UserSeeder::class,
             Development\RoleSeeder::class,
             Development\PermissionSeeder::class,
+            Development\BrandSeeder::class,
+            Development\CategorySeeder::class,
         ]);
     }
 
