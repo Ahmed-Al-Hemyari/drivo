@@ -15,11 +15,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        if (config('app.env') == 'production')
+          $this->productionSeeders();
+        else
+          $this->devSeeders();
+    }
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+    public function devSeeders() {
+        $this->call([
+            Development\UserSeeder::class,
+            Development\RoleSeeder::class,
+            Development\PermissionSeeder::class,
+        ]);
+    }
+
+    public function productionSeeders() {
+        $this->call([
+            Production\UserSeeder::class,
+            Production\RoleSeeder::class,
+            Production\PermissionSeeder::class,
         ]);
     }
 }
