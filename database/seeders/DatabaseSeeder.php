@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             Development\CategorySeeder::class,
             Development\CarSeeder::class,
             Development\BookingSeeder::class,
+            Development\ReviewSeeder::class,
         ]);
     }
 

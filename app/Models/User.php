@@ -46,6 +46,16 @@ class User extends Authenticatable implements PasskeyUser
         return Permission::query()->whereIn('role_id', $this->roles->pluck('id'))->get();
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class, Booking::class);
+    }
+
     /**
      * Get the attributes that should be cast.
      *
