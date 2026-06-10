@@ -33,13 +33,30 @@ class UserSeeder extends Seeder
         $adminUser->roles()->attach($adminRole);
 
         $customerUser = \App\Models\User::create([
-                'name' => 'Customer',
-                'email' => 'customer@drivo.com',
+                'name' => 'Customer1',
+                'email' => 'customer1@drivo.com',
                 'password' => '123456',
         ]);
 
         $customerRole = \App\Models\Role::query()->where('name', 'customer')->first();
         $customerUser->roles()->attach($customerRole);
 
+        $customerUser2 = \App\Models\User::create([
+                'name' => 'Customer2',
+                'email' => 'customer2@drivo.com',
+                'password' => '123456',
+        ]);
+
+        $customerRole = \App\Models\Role::query()->where('name', 'customer')->first();
+        $customerUser2->roles()->attach($customerRole);
+
+        $customerUser3 = \App\Models\User::create([
+                'name' => 'Customer3',
+                'email' => 'customer3@drivo.com',
+                'password' => '123456',
+        ]);
+
+        $customerRole = \App\Models\Role::query()->where('name', 'customer')->first();
+        $customerUser3->roles()->attach($customerRole);
     }
 }

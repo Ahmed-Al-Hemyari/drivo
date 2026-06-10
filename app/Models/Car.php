@@ -28,10 +28,34 @@ class Car extends Model
         return $this->hasManyThrough(Review::class, Booking::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function rate(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->reviews->avg('rate'),
+            get: function () {
+                if ($this->reviews->isEmpty()) {
+                    return null;
+                }
+
+                return round($this->reviews->avg('rate'), 1);
+            }
+        );
+    }
+
+    public function status(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if ($this->bookings->where('status', 'active')->notEmpty()) {
+                    return 'rented';
+                }
+
+                return 'available';
+            }
         );
     }
 }
