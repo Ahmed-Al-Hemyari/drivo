@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             Development\PermissionSeeder::class,
             Development\BrandSeeder::class,
             Development\CategorySeeder::class,
+            Development\CarSeeder::class,
         ]);
     }
 

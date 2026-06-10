@@ -76,7 +76,7 @@ class BrandSeeder extends Seeder
             ],
             [
                 'name_en' => 'Porsche',
-                'name_ar' => 'بورشه',
+                'name_ar' => 'بورش',
                 'logo' => 'storage/uploads/img/brands/porsche.jpg',
                 'url' => 'https://porsche.com'
             ],
