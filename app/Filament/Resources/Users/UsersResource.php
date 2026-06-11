@@ -42,6 +42,11 @@ class UsersResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = null;
     protected static ?int $navigationSort = 1;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('General Management');
+    }
+
     public static function form(Schema $schema): Schema
     {
         return UsersForm::configure($schema);
