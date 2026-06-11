@@ -6,6 +6,8 @@ use App\Filament\Resources\Roles\Pages\CreateRole;
 use App\Filament\Resources\Roles\Pages\EditRole;
 use App\Filament\Resources\Roles\Pages\ListRoles;
 use App\Filament\Resources\Roles\Pages\ViewRole;
+use App\Filament\Resources\Roles\RelationManagers\PermissionsRelationManager;
+use App\Filament\Resources\Roles\RelationManagers\UsersRelationManager;
 use App\Filament\Resources\Roles\Schemas\RoleForm;
 use App\Filament\Resources\Roles\Schemas\RoleInfolist;
 use App\Filament\Resources\Roles\Tables\RolesTable;
@@ -67,7 +69,8 @@ class RoleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UsersRelationManager::class,
+            PermissionsRelationManager::class,
         ];
     }
 
