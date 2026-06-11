@@ -31,12 +31,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->brandName('Drivo')
             ->colors([
-                'primary' => Color::Hex('#941b1d'),
+                'primary' => Color::hex('#FF5A00'),
+                'gray'    => Color::Zinc,
             ])
             ->font('Cairo')
-            // ->brandLogo('/storage/masar-light.svg')
-            // ->darkModeBrandLogo('/storage/masar-dark.svg')
+            ->brandLogo('/drivo-light-logo.svg')
+            ->darkModeBrandLogo('/drivo-dark-logo.svg')
+            ->favicon('/drivo-favicon.svg')
             ->brandLogoHeight('40px')
             ->maxContentWidth(Width::Full)
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)
