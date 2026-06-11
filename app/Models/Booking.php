@@ -36,7 +36,12 @@ class Booking extends Model
         return $this->hasOne(Review::class);
     }
 
-    public function totalPrice(): Attribute
+    public function moneyTransactions()
+    {
+        return $this->hasMany(MoneyTransaction::class);
+    }
+
+    public function totalAmount(): Attribute
     {
         return Attribute::make(
             get: function () {
@@ -48,6 +53,24 @@ class Booking extends Model
                 $chargeableDays = max(1, $days);
 
                 return $this->car->daily_price * $chargeableDays;
+            }
+        );
+    }
+
+    public function totalPaid(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->moneyTransactions->where('transaction_type', 0)->sum('amount');
+            }
+        );
+    }
+
+    public function totalRemaining(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                return $this->totalAmount - $this->totalPaid;
             }
         );
     }
