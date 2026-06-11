@@ -18,9 +18,7 @@ class UserSeeder extends Seeder
                 'name' => 'dev',
                 'email' => 'dev@drivo.com',
                 'password' => 'dev-123',
+                'role_id' => 1,
         ]);
-
-        $devRole = \App\Models\Role::query()->where('name', 'super_admin')->first();
-        $devUser->roles()->attach($devRole);
     }
 }

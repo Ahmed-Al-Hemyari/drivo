@@ -25,25 +25,40 @@ class User extends Authenticatable implements PasskeyUser
     public function isSuperAdmin(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->roles->contains('name', 'super_admin'),
+            get: fn () => optional($this->role)->name == 'super_admin',
         );
     }
-
     public function isAdmin(): Attribute
     {
         return Attribute::make(
-            get: fn () => $this->roles->contains('name', 'admin'),
+            get: fn () => optional($this->role)->name == 'admin',
+        );
+    }
+    public function isNormalUser(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => optional($this->role)->name != 'super_admin' && optional($this->role)->name != 'admin' ,
         );
     }
 
-    public function roles()
+    public function hasPermission($method, $name)
     {
-        return $this->belongsToMany(Role::class, 'user_role');
+        try {
+            return $this->permissions()->where('name', $name)->first()[$method];
+        } catch (\Throwable $th) {
+            return false;
+            //throw $th;
+        }
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
     }
 
     public function permissions()
     {
-        return Permission::query()->whereIn('role_id', $this->roles->pluck('id'))->get();
+        return optional($this->role)->permissions;
     }
 
     public function bookings()

@@ -23,14 +23,15 @@ class DatabaseSeeder extends Seeder
 
     public function devSeeders() {
         $this->call([
-            Development\UserSeeder::class,
             Development\RoleSeeder::class,
+            Development\UserSeeder::class,
             Development\PermissionSeeder::class,
             Development\BrandSeeder::class,
             Development\CategorySeeder::class,
             Development\CarSeeder::class,
             Development\BookingSeeder::class,
             Development\ReviewSeeder::class,
+            Development\MoneyTransactionSeeder::class,
         ]);
     }
 
