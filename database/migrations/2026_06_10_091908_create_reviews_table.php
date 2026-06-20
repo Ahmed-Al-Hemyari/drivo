@@ -16,6 +16,7 @@ return new class extends Migration
             $table->decimal('rate', 2, 1);
             $table->text('comment')->nullable();
             $table->foreignId('booking_id')->constrained()->onDelete('cascade');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
