@@ -25,6 +25,8 @@ class BrandForm
                             ->image()
                             ->required(fn (string $context) => $context === 'create')
                             ->dehydrated(fn ($state) => filled($state))
+                            ->disk('public')
+                            ->directory('uploads/img/brands')
                             ->preserveFilenames(false)
                             ->saveUploadedFileUsing(function ($file, $state, $set, $get) {
                                 $name = $get('name_en') ?? 'logo';
