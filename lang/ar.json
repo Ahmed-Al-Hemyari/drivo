@@ -54,8 +54,12 @@
     "Daily Price": "السعر اليومي",
     "Price": "السعر",
     "Image": "الصورة",
+    "Images": "الصور",
     "Rate": "التقييم",
     "Status": "الحالة",
+    "Unavailable": "غير متاحة",
+    "Available": "متاحة",
+    "No reviews yet": "لا توجد تقييمات بعد",
 
     "Bookings": "الحجوزات",
     "Booking": "الحجز",

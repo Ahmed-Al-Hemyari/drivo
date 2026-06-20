@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name_en');
             $table->string('name_ar');
             $table->decimal('daily_price', 8, 2);
-            $table->string('image')->nullable();
+            $table->json('images')->nullable();
             $table->foreignId('brand_id')
                 ->constrained('brands')
                 ->cascadeOnDelete();

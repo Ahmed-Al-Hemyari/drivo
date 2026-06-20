@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['name_en', 'name_ar', 'daily_price', 'image'])]
+#[Fillable(['name_en', 'name_ar', 'daily_price', 'images', 'brand_id', 'category_id'])]
 class Car extends Model
 {
     use HasFactory, SoftDeletes;
@@ -25,7 +25,7 @@ class Car extends Model
 
     public function reviews()
     {
-        return $this->hasManyThrough(Review::class, Booking::class);
+        return $this->hasManyThrough(Review::class, Booking::class, 'car_id', 'booking_id', 'id', 'id');
     }
 
     public function bookings()
@@ -50,12 +50,19 @@ class Car extends Model
     {
         return Attribute::make(
             get: function () {
-                if ($this->bookings->where('status', 'active')->notEmpty()) {
-                    return 'rented';
+                if ($this->bookings->where('status', 'active')->isNotEmpty()) {
+                    return 'Unavailable';
                 }
 
-                return 'available';
+                return 'Available';
             }
         );
+    }
+
+    protected function casts(): Array
+    {
+        return [
+            'images' => 'array',
+        ];
     }
 }
