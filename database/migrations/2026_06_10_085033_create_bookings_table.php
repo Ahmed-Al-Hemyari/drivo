@@ -27,6 +27,7 @@ return new class extends Migration
                 'late'
             ])->default('pending');
             $table->boolean('rated')->default(false);
+            $table->foreignId('booking_status_id')->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();

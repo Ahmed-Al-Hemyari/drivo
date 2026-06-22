@@ -85,6 +85,14 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'role_id' => $super_admin_role_id,
+                'name' => PermissionName::Verify(Booking::class),
+                'label_en' => 'Bookings Statuses',
+                'label_ar' => 'حالات الحجوزات',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => true, 'View' => true, 'Create' => true, 'Replicate' => true, 'Update' => true, 'Delete' => true, 'DeleteAny' => true, 'Restore' => true, 'RestoreAny' => true, 'ForceDelete' => true, 'ForceDeleteAny' => true,
+            ],
+            [
+                'role_id' => $super_admin_role_id,
                 'name' => PermissionName::Verify(Review::class),
                 'label_en' => 'Reviews',
                 'label_ar' => 'التقييمات',
@@ -149,6 +157,14 @@ class PermissionSeeder extends Seeder
                 'label_ar' => 'الحجوزات',
                 'type' => PermissionTypes::CRUD->value,
                 'ViewAny' => true, 'View' => true, 'Create' => true, 'Replicate' => true, 'Update' => true, 'Delete' => true, 'DeleteAny' => true, 'Restore' => true, 'RestoreAny' => true, 'ForceDelete' => false, 'ForceDeleteAny' => false,
+            ],
+            [
+                'role_id' => $admin_role_id,
+                'name' => PermissionName::Verify(Booking::class),
+                'label_en' => 'Bookings Statuses',
+                'label_ar' => 'حالات الحجوزات',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => true, 'View' => true, 'Create' => false, 'Replicate' => false, 'Update' => false, 'Delete' => false, 'DeleteAny' => false, 'Restore' => true, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
             ],
             [
                 // Admins moderate reviews (view and delete bad ones) but they shouldn't write or edit them
@@ -219,6 +235,14 @@ class PermissionSeeder extends Seeder
                 'label_ar' => 'الحجوزات',
                 'type' => PermissionTypes::CRUD->value,
                 'ViewAny' => true, 'View' => true, 'Create' => true, 'Replicate' => false, 'Update' => true, 'Delete' => false, 'DeleteAny' => false, 'Restore' => false, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
+            ],
+            [
+                'role_id' => $customer_role_id,
+                'name' => PermissionName::Verify(Booking::class),
+                'label_en' => 'Bookings Statuses',
+                'label_ar' => 'حالات الحجوزات',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => false, 'View' => false, 'Create' => false, 'Replicate' => false, 'Update' => false, 'Delete' => false, 'DeleteAny' => false, 'Restore' => true, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
             ],
             [
                 // Customers view all reviews, and can create/update their own reviews
