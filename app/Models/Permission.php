@@ -24,6 +24,7 @@ class Permission extends Model
         Brand::class,
         Category::class,
         Car::class,
+        BookingStatus::class,
         Booking::class,
         Review::class,
     ];

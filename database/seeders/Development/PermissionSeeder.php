@@ -11,6 +11,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Car;
 use App\Models\Booking;
+use App\Models\BookingStatus;
 use App\Models\Review;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -85,7 +86,7 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'role_id' => $super_admin_role_id,
-                'name' => PermissionName::Verify(Booking::class),
+                'name' => PermissionName::Verify(BookingStatus::class),
                 'label_en' => 'Bookings Statuses',
                 'label_ar' => 'حالات الحجوزات',
                 'type' => PermissionTypes::CRUD->value,
@@ -160,7 +161,7 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'role_id' => $admin_role_id,
-                'name' => PermissionName::Verify(Booking::class),
+                'name' => PermissionName::Verify(BookingStatus::class),
                 'label_en' => 'Bookings Statuses',
                 'label_ar' => 'حالات الحجوزات',
                 'type' => PermissionTypes::CRUD->value,
@@ -238,7 +239,7 @@ class PermissionSeeder extends Seeder
             ],
             [
                 'role_id' => $customer_role_id,
-                'name' => PermissionName::Verify(Booking::class),
+                'name' => PermissionName::Verify(BookingStatus::class),
                 'label_en' => 'Bookings Statuses',
                 'label_ar' => 'حالات الحجوزات',
                 'type' => PermissionTypes::CRUD->value,

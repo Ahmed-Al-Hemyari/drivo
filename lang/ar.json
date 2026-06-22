@@ -70,6 +70,20 @@
     "Total Remaining": "المبلغ المتبقي",
     "Notes": "ملاحظات",
     "Rated": "تم التقييم",
+    "Pending": "تحت الإنتظار",
+    "Confirmed": "مؤكد",
+    "Cancelled": "ملغي",
+    "Refused": "مرفوض",
+    "Active": "نشط",
+    "Expired": "منتهي",
+    "Completed": "مكتمل",
+    "Late": "متأخر",
+    "Duration": "المدة",
+
+    "Booking Statuses": "حالات الحجوزات",
+    "Booking Status": "حالة الحجز",
+    "Background Color": "لون الخلفية",
+    "Font Color": "لون الخط",
 
     "Reviews": "المراجعات",
     "Review": "المراجعة",
@@ -84,5 +98,7 @@
     "ATM": "شبكة",
     "Cash": "نقد",
     "Income": "إيراد",
-    "Expense": "صرف"
+    "Expense": "صرف",
+
+    "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى."
 }
