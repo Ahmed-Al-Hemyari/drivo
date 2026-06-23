@@ -21,9 +21,22 @@ class Booking extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected function casts(): array
+    {
+        return [
+            'start_date' => 'datetime',
+            'end_date' => 'datetime',
+        ];
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function bookingStatus()
+    {
+        return $this->belongsTo(BookingStatus::class);
     }
 
     public function car()
@@ -41,6 +54,22 @@ class Booking extends Model
         return $this->hasMany(MoneyTransaction::class);
     }
 
+    public function duration(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->car) {
+                    return 0;
+                }
+
+                $days = $this->start_date->diffInDays($this->end_date);
+                $chargeableDays = round(max(1, $days));
+
+                return $chargeableDays;
+            }
+        );
+    }
+
     public function totalAmount(): Attribute
     {
         return Attribute::make(
@@ -50,7 +79,7 @@ class Booking extends Model
                 }
 
                 $days = $this->start_date->diffInDays($this->end_date);
-                $chargeableDays = max(1, $days);
+                $chargeableDays = round(max(1, $days));
 
                 return $this->car->daily_price * $chargeableDays;
             }
@@ -61,7 +90,7 @@ class Booking extends Model
     {
         return Attribute::make(
             get: function () {
-                return $this->moneyTransactions->where('transaction_type', 0)->sum('amount');
+                return $this->moneyTransactions()->where('transaction_type', 0)->sum('amount');
             }
         );
     }

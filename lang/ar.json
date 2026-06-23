@@ -79,6 +79,11 @@
     "Completed": "مكتمل",
     "Late": "متأخر",
     "Duration": "المدة",
+    "Days": "أيام",
+    "Confirm Bookings": "تأكيد الحجوزات",
+    "Refuse Bookings": "رفض الحجوزات",
+    "Cancel Bookings": "إلغاء الحجوزات",
+    "Update to Completed": "تحديث إلى مكتمل",
 
     "Booking Statuses": "حالات الحجوزات",
     "Booking Status": "حالة الحجز",

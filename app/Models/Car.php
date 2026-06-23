@@ -46,6 +46,30 @@ class Car extends Model
         );
     }
 
+    public function unavailableDates(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $bookings = $this->bookings()->whereIn('status',['pending', 'confirmed', 'active'])->get(['start_date', 'end_date']);
+                $dates = [];
+
+                foreach ($bookings as $booking) {
+                    $period = new \DatePeriod(
+                        new \DateTime($booking->start_date),
+                        new \DateInterval('P1D'),
+                        (new \DateTime($booking->end_date))->modify('+1 day')
+                    );
+
+                    foreach ($period as $date) {
+                        $dates[] = $date->format('Y-m-d');
+                    }
+                }
+
+                return array_values(array_unique($dates));
+            }
+        );
+    }
+
     public function status(): Attribute
     {
         return Attribute::make(
@@ -55,6 +79,20 @@ class Car extends Model
                 }
 
                 return 'Available';
+            }
+        );
+    }
+
+    public function fullName(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                $locale = app()->getLocale();
+
+                $brandName = $this->brand?->{"name_{$locale}"} ?? '';
+                $carName = $this->{"name_{$locale}"} ?? '';
+
+                return trim("{$brandName} {$carName}");
             }
         );
     }
