@@ -6,6 +6,7 @@ use App\Filament\Resources\BookingStatuses\Pages\CreateBookingStatus;
 use App\Filament\Resources\BookingStatuses\Pages\EditBookingStatus;
 use App\Filament\Resources\BookingStatuses\Pages\ListBookingStatuses;
 use App\Filament\Resources\BookingStatuses\Pages\ViewBookingStatus;
+use App\Filament\Resources\BookingStatuses\RelationManagers\BookingsRelationManager;
 use App\Filament\Resources\BookingStatuses\Schemas\BookingStatusForm;
 use App\Filament\Resources\BookingStatuses\Schemas\BookingStatusInfolist;
 use App\Filament\Resources\BookingStatuses\Tables\BookingStatusesTable;
@@ -65,7 +66,7 @@ class BookingStatusResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BookingsRelationManager::class
         ];
     }
 
