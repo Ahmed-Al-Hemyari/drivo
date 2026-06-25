@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Models\GeneralSetting;
 use CraftForge\FilamentLanguageSwitcher\FilamentLanguageSwitcherPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -33,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('Drivo')
             ->colors([
-                'primary' => Color::hex('#FF5A00'),
+                'primary' => GeneralSetting::query()->where('key', 'primary_color')->value('value') ?? Color::Amber,
                 'gray'    => Color::Zinc,
             ])
             ->font('Cairo')

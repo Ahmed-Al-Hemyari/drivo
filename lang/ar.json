@@ -129,5 +129,7 @@
     "tiktok_url" : "حساب تبك توك",
 
 
-    "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى."
+    "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى.",
+    "Enter the color hex code starting with # (e.g., #000000)": "أدخل رمز اللون بصيغة Hex يبدأ بـ # (مثال: #000000)",
+    "The color format must be a valid hex code like #000000.": "يجب أن يكون تنسيق اللون رمز Hex صحيحاً مثل #000000."
 }
