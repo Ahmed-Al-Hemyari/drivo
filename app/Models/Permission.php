@@ -27,5 +27,6 @@ class Permission extends Model
         BookingStatus::class,
         Booking::class,
         Review::class,
+        MoneyTransaction::class
     ];
 }
