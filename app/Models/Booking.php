@@ -77,7 +77,7 @@ class Booking extends Model
         );
     }
 
-    public function totalAmount(): Attribute
+    public function amount(): Attribute
     {
         return Attribute::make(
             get: function () {
@@ -89,6 +89,40 @@ class Booking extends Model
                 $chargeableDays = round(max(1, $days));
 
                 return $this->car->daily_price * $chargeableDays;
+            }
+        );
+    }
+
+    public function VAT(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->car) {
+                    return 0;
+                }
+
+                $vatPercentage = (float) GeneralSetting::query()
+                    ->where('key', 'VAT_percentage')
+                    ->value('value') ?? 0;
+
+                $vatAmount = $vatPercentage * $this->amount;
+
+                return $vatAmount;
+            }
+        );
+    }
+
+    public function totalAmountWithVAT(): Attribute
+    {
+        return Attribute::make(
+            get: function () {
+                if (!$this->car) {
+                    return 0;
+                }
+
+                $totalAmountWithVAT = $this->VAT + $this->amount;
+
+                return $totalAmountWithVAT;
             }
         );
     }
@@ -106,7 +140,7 @@ class Booking extends Model
     {
         return Attribute::make(
             get: function () {
-                return $this->totalAmount - $this->totalPaid;
+                return $this->totalAmountWithVAT - $this->totalPaid;
             }
         );
     }

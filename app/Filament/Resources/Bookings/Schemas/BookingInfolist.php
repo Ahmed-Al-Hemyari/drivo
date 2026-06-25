@@ -66,9 +66,14 @@ class BookingInfolist
                                 );
                             })
                             ->html(),
-                        TextEntry::make('total_amount')
-                            ->label(__('Total Amount'))
-                            // ->color('success')
+                        TextEntry::make('amount')
+                            ->label(__('Amount'))
+                            ->weight(FontWeight::Bold),
+                        TextEntry::make('vat')
+                            ->label(__('VAT'))
+                            ->weight(FontWeight::Bold),
+                        TextEntry::make('total_amount_with_vat')
+                            ->label(__('Total Amount With VAT'))
                             ->weight(FontWeight::Bold),
                         TextEntry::make('total_paid')
                             ->label(__('Total Paid'))

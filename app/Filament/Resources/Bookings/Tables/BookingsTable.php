@@ -59,6 +59,12 @@ class BookingsTable
                     })
                     ->sortable()
                     ->searchable(),
+
+                IconColumn::make('rated')
+                    ->label(__('Rated'))
+                    ->alignCenter()
+                    ->sortable()
+                    ->boolean(),
                 TextColumn::make('bookingStatus.name_' . app()->getLocale())
                     ->searchable()
                     ->label(__('Booking Status'))
@@ -81,23 +87,28 @@ class BookingsTable
                         );
                     })
                     ->html(),
-                TextColumn::make('total_amount')
-                    ->label(__('Total Amount'))
-                    // ->color('success')
-                    ->weight(FontWeight::Bold),
+                TextColumn::make('amount')
+                    ->label(__('Amount'))
+                    ->weight(FontWeight::Bold)
+                    ->alignCenter(),
+                TextColumn::make('vat')
+                    ->label(__('VAT'))
+                    ->weight(FontWeight::Bold)
+                    ->alignCenter(),
+                TextColumn::make('total_amount_with_vat')
+                    ->label(__('Total Amount With VAT'))
+                    ->weight(FontWeight::Bold)
+                    ->alignCenter(),
                 TextColumn::make('total_paid')
                     ->label(__('Total Paid'))
                     ->color('success')
-                    ->weight(FontWeight::Bold),
+                    ->weight(FontWeight::Bold)
+                    ->alignCenter(),
                 TextColumn::make('total_remaining')
                     ->label(__('Total Remaining'))
                     ->color('danger')
-                    ->weight(FontWeight::Bold),
-                IconColumn::make('rated')
-                    ->label(__('Rated'))
-                    ->alignCenter()
-                    ->sortable()
-                    ->boolean(),
+                    ->weight(FontWeight::Bold)
+                    ->alignCenter(),
             ])
             ->filters([
                 SelectFilter::make('car_id')
@@ -186,8 +197,8 @@ class BookingsTable
                         })
                         ->color('danger'),
                     // DeleteBulkAction::make(),
-                    // ForceDeleteBulkAction::make(),
-                    // RestoreBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
             ]);
     }
