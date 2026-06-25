@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\Car;
 use App\Models\Booking;
 use App\Models\BookingStatus;
+use App\Models\GeneralSetting;
 use App\Models\MoneyTransaction;
 use App\Models\Review;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -109,6 +110,14 @@ class PermissionSeeder extends Seeder
                 'type' => PermissionTypes::CRUD->value,
                 'ViewAny' => true, 'View' => true, 'Create' => true, 'Replicate' => true, 'Update' => true, 'Delete' => true, 'DeleteAny' => true, 'Restore' => true, 'RestoreAny' => true, 'ForceDelete' => true, 'ForceDeleteAny' => true,
             ],
+            [
+                'role_id' => $super_admin_role_id,
+                'name' => PermissionName::Verify(GeneralSetting::class),
+                'label_en' => 'General Settings',
+                'label_ar' => 'الإعدادات العامة',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => true, 'View' => true, 'Create' => true, 'Replicate' => true, 'Update' => true, 'Delete' => true, 'DeleteAny' => true, 'Restore' => true, 'RestoreAny' => true, 'ForceDelete' => true, 'ForceDeleteAny' => true,
+            ],
         ];
 
         $admin_permissions = [
@@ -192,6 +201,14 @@ class PermissionSeeder extends Seeder
                 'label_ar' => 'العمليات المالية',
                 'type' => PermissionTypes::CRUD->value,
                 'ViewAny' => true,  'View' => true, 'Create' => false, 'Replicate' => false, 'Update' => false, 'Delete' => false,  'DeleteAny' => false,  'Restore' => false, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
+            ],
+            [
+                'role_id' => $admin_role_id,
+                'name' => PermissionName::Verify(GeneralSetting::class),
+                'label_en' => 'General Settings',
+                'label_ar' => 'الإعدادات العامة',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => true, 'View' => true, 'Create' => false, 'Replicate' => false,  'Update' => false, 'Delete' => false, 'DeleteAny' => false, 'Restore' => false, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
             ],
         ];
 
@@ -278,6 +295,14 @@ class PermissionSeeder extends Seeder
                 'label_ar' => 'العمليات المالية',
                 'type' => PermissionTypes::CRUD->value,
                 'ViewAny' => true,  'View' => true, 'Create' => false, 'Replicate' => false, 'Update' => false, 'Delete' => false,  'DeleteAny' => false, 'Restore' => false, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
+            ],
+            [
+                'role_id' => $customer_role_id,
+                'name' => PermissionName::Verify(GeneralSetting::class),
+                'label_en' => 'General Settings',
+                'label_ar' => 'الإعدادات العامة',
+                'type' => PermissionTypes::CRUD->value,
+                'ViewAny' => false, 'View' => false, 'Create' => false, 'Replicate' => false,  'Update' => false, 'Delete' => false, 'DeleteAny' => false, 'Restore' => false, 'RestoreAny' => false, 'ForceDelete' => false, 'ForceDeleteAny' => false,
             ],
         ];
 
