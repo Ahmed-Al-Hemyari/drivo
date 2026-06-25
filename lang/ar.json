@@ -107,5 +107,25 @@
     "Income": "إيراد",
     "Expense": "صرف",
 
+    "General Settings": "الإعدادات العامة",
+    "Setting": "الإعداد",
+    "Setting Name": "اسم الإعداد",
+    "Value": "القيمة",
+    "English Value": "القيمة بالإنجليزية",
+    "Arabic Value": "القيمة بالعربية",
+    "Published": "منشور",
+    "name": "الاسم",
+    "business_name" : "اسم المؤسسة - وسط",
+    "business_full_name" : "اسم المؤسسة - الكامل",
+    "phone_number" : "رقم الجوال",
+    "website_url" : "رابط الموقع",
+    "website_url_2" : "رابط الموقع 2",
+    "x_url" : "حساب إكس",
+    "instagram_url" : "حساب انستقرام",
+    "fb_url" : "حساب فيسبوك",
+    "snapchat_url" : "حساب سناب شات",
+    "tiktok_url" : "حساب تبك توك",
+
+
     "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى."
 }
