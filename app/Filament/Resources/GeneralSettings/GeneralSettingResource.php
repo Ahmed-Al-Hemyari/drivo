@@ -38,7 +38,7 @@ class GeneralSettingResource extends Resource
         return __('General Settings');
     }
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCheckBadge;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
     protected static string|UnitEnum|null $navigationGroup = null;
     protected static ?int $navigationSort = 4;
 
