@@ -81,8 +81,8 @@ class GeneralSettingSeeder extends Seeder
             ],
             [
                 'key' => 'VAT_percentage',
-                'value' => '1.15',
-                'value_ar' => '1.15',
+                'value' => '0',
+                'value_ar' => '0',
                 'is_published' => true
             ]
         ];
