@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             Development\BookingSeeder::class,
             Development\ReviewSeeder::class,
             Development\MoneyTransactionSeeder::class,
+            Development\GeneralSettingSeeder::class
         ]);
     }
 
@@ -41,7 +42,8 @@ class DatabaseSeeder extends Seeder
             Production\UserSeeder::class,
             Production\RoleSeeder::class,
             Production\PermissionSeeder::class,
-            Production\BookingStatusSeeder::class
+            Production\BookingStatusSeeder::class,
+            Production\GeneralSettingSeeder::class,
         ]);
     }
 }
