@@ -21,4 +21,11 @@ class MoneyTransaction extends Model
     {
         return $this->belongsTo(Booking::class);
     }
+
+    protected function casts(): array
+    {
+        return [
+            'transaction_type' => 'integer',
+        ];
+    }
 }

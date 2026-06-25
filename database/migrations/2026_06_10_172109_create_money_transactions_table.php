@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('transaction_type');
             $table->boolean('atm');
             $table->longText('notes')->nullable();
-            $table->foreignId('booking_id')->constrained()->onDelete('cascade')->nullable();
+            $table->foreignId('booking_id')->nullable()->constrained()->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });
