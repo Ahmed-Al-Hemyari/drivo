@@ -54,6 +54,13 @@ class Booking extends Model
         return $this->hasMany(MoneyTransaction::class);
     }
 
+    public function title(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => __('Booking No.') . ': ' . $this->id
+        );
+    }
+
     public function duration(): Attribute
     {
         return Attribute::make(
