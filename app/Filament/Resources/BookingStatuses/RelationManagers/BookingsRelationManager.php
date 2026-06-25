@@ -4,6 +4,7 @@ namespace App\Filament\Resources\BookingStatuses\RelationManagers;
 
 use App\Filament\Resources\Bookings\BookingResource;
 use App\Filament\Resources\Bookings\Pages\EditBooking;
+use App\Filament\Resources\BookingStatuses\Pages\EditBookingStatus;
 use Filament\Actions\CreateAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Table;
@@ -25,6 +26,6 @@ class BookingsRelationManager extends RelationManager
 
     public static function canViewForRecord(Model $ownerRecord, string $pageClass): bool
     {
-        return $pageClass !== EditBooking::class;
+        return $pageClass !== EditBookingStatus::class;
     }
 }

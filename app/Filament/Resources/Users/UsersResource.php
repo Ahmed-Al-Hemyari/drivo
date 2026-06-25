@@ -66,7 +66,7 @@ class UsersResource extends Resource
     public static function getRelations(): array
     {
         return [
-            BookingsRelationManager::class
+            BookingsRelationManager::make()
         ];
     }
 

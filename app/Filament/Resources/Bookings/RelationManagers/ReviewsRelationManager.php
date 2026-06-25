@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReviewsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'Reviews';
+    protected static string $relationship = 'review';
 
     protected static ?string $relatedResource = ReviewResource::class;
 
