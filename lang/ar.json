@@ -127,6 +127,8 @@
     "fb_url" : "حساب فيسبوك",
     "snapchat_url" : "حساب سناب شات",
     "tiktok_url" : "حساب تبك توك",
+    "primary_color": "اللون الرئيسي",
+    "VAT_percentage": "نسبة ضربية القيمة المضافة",
 
 
     "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى.",
