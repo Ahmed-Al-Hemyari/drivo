@@ -2,13 +2,18 @@ export type User = {
     id: number;
     name: string;
     email: string;
-    avatar?: string;
-    email_verified_at: string | null;
-    two_factor_enabled?: boolean;
-    created_at: string;
-    updated_at: string;
-    [key: string]: unknown;
+    phone_number?: string;
+    role_id: number;
+
+    role: Role;
 };
+
+export type Role = {
+    id: number;
+    name: string;
+    label_en: string;
+    label_ar: string;
+}
 
 export type Auth = {
     user: User;
