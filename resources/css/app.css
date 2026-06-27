@@ -1,4 +1,9 @@
 @import 'tailwindcss';
+@plugin "daisyui";
+
+* {
+    font-family: 'Cairo', sans-serif;
+}
 
 @import 'tw-animate-css';
 
