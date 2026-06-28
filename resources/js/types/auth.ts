@@ -2,6 +2,7 @@ export type User = {
     id: number;
     name: string;
     email: string;
+    avatar?: string;
     phone_number?: string;
     role_id: number;
 
