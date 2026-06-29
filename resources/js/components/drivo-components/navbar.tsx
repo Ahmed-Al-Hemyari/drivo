@@ -122,7 +122,7 @@ const Navbar: React.FC<NavbarProps> = ({ elements }) => {
             <Link
               href="/login"
               as="button"
-              className="btn btn-sm bg-primary border-none text-white rounded-full px-6 hover:bg-primary/90 shadow-sm active:scale-95 transition-all"
+              className="btn btn-sm bg-(--color-primary-color) hover:bg-(--color-primary-hover) border-none text-white rounded-full px-6 shadow-sm active:scale-95 transition-all"
             >
               {__("Login")}
             </Link>
