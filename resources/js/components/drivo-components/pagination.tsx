@@ -8,10 +8,7 @@ interface PaginationProps {
 }
 
 export function Pagination({ links }: PaginationProps) {
-  const { locale } = usePage().props;
   const { __ } = useTrans();
-
-  // If there's only 1 page, hide it completely
   if (!links || links.length <= 3) return null;
 
   const cleanLabel = (label: string) => {
@@ -21,8 +18,8 @@ export function Pagination({ links }: PaginationProps) {
   };
 
   return (
-    <div className="flex justify-center my-10 w-full" data-theme="light">
-      <div className="join border border-gray-200 shadow-sm">
+    <div className="flex justify-center my-10 w-full">
+      <div className="join border border-base-300 shadow-sm bg-base-100">
         {links.map((link, index) => {
           const isLabelString = link.label.includes('Previous') || link.label.includes('Next');
 
@@ -31,7 +28,7 @@ export function Pagination({ links }: PaginationProps) {
               <button
                 key={index}
                 disabled
-                className="join-item btn btn-md btn-ghost text-gray-400 no-animation cursor-not-allowed"
+                className="join-item btn btn-md btn-ghost text-base-content/40 cursor-not-allowed"
                 dangerouslySetInnerHTML={{ __html: cleanLabel(link.label) }}
               />
             );
@@ -44,11 +41,10 @@ export function Pagination({ links }: PaginationProps) {
               preserveScroll
               className={`join-item btn btn-md ${
                 link.active
-                  ? 'btn-primary bg-(--color-primary-color) border-(--color-primary-color) text-white font-bold'
-                  : 'btn-ghost text-gray-700 hover:bg-base-200'
+                  ? 'btn-primary bg-(--color-primary-color) border-(--color-primary-color) text-white'
+                  : 'btn-ghost text-base-content/80 hover:bg-base-200'
               }`}
             >
-              {/* If it's HTML code entity like &laquo;, decode it safely, otherwise print string */}
               {isLabelString ? (
                 <span dangerouslySetInnerHTML={{ __html: cleanLabel(link.label) }} />
               ) : (
