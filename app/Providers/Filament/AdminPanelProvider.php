@@ -41,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogo('/drivo-light-logo.svg')
             ->darkModeBrandLogo('/drivo-dark-logo.svg')
             ->favicon('/drivo-favicon.svg')
+            ->homeUrl('/admin')
             ->brandLogoHeight('40px')
             ->maxContentWidth(Width::Full)
             ->readOnlyRelationManagersOnResourceViewPagesByDefault(false)

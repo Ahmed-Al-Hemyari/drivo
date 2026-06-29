@@ -13,7 +13,7 @@ Route::get('/cars/{car}', [CarController::class, 'show'])->name('cars.webShow');
 Route::post('/locale/{lang}', [LocaleController::class, 'switch'])->name('locale.switch');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('dashboard', 'dashboard')->name('dashboard');
+    Route::inertia('/', 'home')->name('home');
 });
 
 require __DIR__.'/settings.php';

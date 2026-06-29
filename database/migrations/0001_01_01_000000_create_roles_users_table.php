@@ -30,6 +30,7 @@ return new class extends Migration
             $table->rememberToken();
 
             $table->foreignId('role_id')
+                ->default(3)
                 ->constrained('roles')
                 ->cascadeOnDelete();
             $table->softDeletes();
