@@ -52,14 +52,14 @@ class CarsTable
                     })
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('status')
-                    ->label(__('Status'))
+                TextColumn::make('is_available')
+                    ->label(__('Available'))
                     ->alignCenter()
                     ->formatStateUsing(function ($state) {
                         // Updated to use strong solid backgrounds, bright white text, and matching borders
                         [$translatedText, $bg, $color, $border] = match ($state) {
-                            'Available' => [__('Available'), '#16A34A', '#FFFFFF', '#15803D'],   // Solid Green
-                            'Unavailable' => [__('Unavailable'), '#DC2626', '#FFFFFF', '#B91C1C'], // Solid Red
+                            true => [__('Available'), '#16A34A', '#FFFFFF', '#15803D'],   // Solid Green
+                            false => [__('Unavailable'), '#DC2626', '#FFFFFF', '#B91C1C'], // Solid Red
                             default => [$state, '#4B5563', '#FFFFFF', '#374151'],                 // Solid Gray fallback
                         };
 

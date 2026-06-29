@@ -33,6 +33,12 @@ class Car extends Model
         return $this->hasMany(Booking::class);
     }
 
+    protected $appends = [
+        'rate',
+        'unavailable_dates',
+        'is_available',
+    ];
+
     public function rate(): Attribute
     {
         return Attribute::make(
@@ -70,15 +76,20 @@ class Car extends Model
         );
     }
 
-    public function status(): Attribute
+    public function isAvailable(): Attribute
     {
         return Attribute::make(
             get: function () {
-                if ($this->bookings->where('status', 'active')->isNotEmpty()) {
-                    return 'Unavailable';
+                $hasActiveBookings = $this->bookings()
+                    ->whereHas('bookingStatus', function ($query) {
+                        $query->where('name_en', 'active');
+                    })->exists();
+
+                if ($hasActiveBookings) {
+                    return false;
                 }
 
-                return 'Available';
+                return true;
             }
         );
     }
@@ -95,6 +106,45 @@ class Car extends Model
                 return trim("{$brandName} {$carName}");
             }
         );
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? null, function ($q, $search) {
+            $locale = app()->getLocale();
+
+            $q->where(function ($q) use ($search, $locale) {
+                // Search localized brand names
+                $q->whereHas('brand', fn($q2) => $q2->where("name_ar", 'like', "%$search%"))
+                ->orWhereHas('brand', fn($q2) => $q2->where("name_en", 'like', "%$search%"))
+                // Or search localized category names
+                ->orWhereHas('category', fn($q2) => $q2->where("name_en", 'like', "%$search%"))
+                ->orWhereHas('category', fn($q2) => $q2->where("name_ar", 'like', "%$search%"))
+                // Or search localized car names directly (replaces the broken 'full_name' accessor query)
+                ->orWhere("name_en", 'like', "%$search%")
+                ->orWhere("name_ar", 'like', "%$search%");
+            });
+        });
+
+        $query->when($filters['brand'] ?? null, function ($q, $brand) {
+            $locale = app()->getLocale();
+            $q->whereHas('brand', fn($q2) => $q2->where("name_{$locale}", 'like', "%$brand%"));
+        });
+
+        $query->when($filters['category'] ?? null, function ($q, $category) {
+            $locale = app()->getLocale();
+            $q->whereHas('category', fn($q2) => $q2->where("name_{$locale}", 'like', "%$category%"));
+        });
+
+        $query->when($filters['price'] ?? null, function ($q, $price) {
+            // Uniformly using 'daily_price' to fix the structural naming mismatch
+            if (preg_match('/(\d+)-(\d+)/', $price, $m)) {
+                $q->whereBetween('daily_price', [$m[1], $m[2]]);
+            } elseif (str_ends_with($price, '+')) {
+                $min = (int) rtrim($price, '+');
+                $q->where('daily_price', '>=', $min);
+            }
+        });
     }
 
     protected function casts(): Array

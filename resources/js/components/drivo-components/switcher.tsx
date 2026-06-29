@@ -21,7 +21,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end" data-theme='dark'>
       {/* Trigger Button */}
       <div tabIndex={0} role="button" className="btn btn-ghost text-white normal-case gap-2 border border-gray-700 hover:bg-gray-800">
         <i className="fa-solid fa-globe text-gray-400"></i>

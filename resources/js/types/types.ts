@@ -19,6 +19,12 @@ export type Category = {
     name_ar: string;
 }
 
+export type LinkItem = {
+    url: string | null;
+    label: string;
+    active: boolean;
+}
+
 export type Car = {
     id: number;
     name_en: string;
@@ -26,7 +32,7 @@ export type Car = {
     daily_price: number;
     images?: Array<string>;
     rate?: number | null;
-    status: string;
+    is_available: boolean;
 
     unavailable_dates: Array<string>;
 

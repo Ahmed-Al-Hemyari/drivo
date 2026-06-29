@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\LocaleController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'home')->name('home');
+Route::get('/cars', [CarController::class, 'index'])->name('cars.webIndex');
+Route::get('/cars/{car}', [CarController::class, 'show'])->name('cars.webShow');
 
 // Language Switch
 Route::post('/locale/{lang}', [LocaleController::class, 'switch'])->name('locale.switch');

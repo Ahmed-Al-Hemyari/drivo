@@ -10,6 +10,7 @@ use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\TextSize;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class CarInfolist
 {
@@ -61,13 +62,13 @@ class CarInfolist
                             ->formatStateUsing(fn ($state) => "{$state} / 5")
                             ->placeholder(__('No reviews yet'))
                             ->size(TextSize::Medium),
-                        TextEntry::make('status')
-                            ->label(__('Status'))
+                        TextEntry::make('is_available')
+                            ->label(__('Available'))
                             ->formatStateUsing(function ($state) {
                                 // Updated to use strong solid backgrounds, bright white text, and matching borders
                                 [$translatedText, $bg, $color, $border] = match ($state) {
-                                    'Available' => [__('Available'), '#16A34A', '#FFFFFF', '#15803D'],   // Solid Green
-                                    'Unavailable' => [__('Unavailable'), '#DC2626', '#FFFFFF', '#B91C1C'], // Solid Red
+                                    true => [__('Available'), '#16A34A', '#FFFFFF', '#15803D'],   // Solid Green
+                                    false => [__('Unavailable'), '#DC2626', '#FFFFFF', '#B91C1C'], // Solid Red
                                     default => [$state, '#4B5563', '#FFFFFF', '#374151'],                 // Solid Gray fallback
                                 };
 

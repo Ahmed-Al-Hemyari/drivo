@@ -34,6 +34,8 @@
     "Choose hybrid or electric — drive clean, save green.": "اختر هجينة أو كهربائية — قُد بنقاء ووفر بذكاء.",
     "Mobile Experience": "تجربة الهاتف المحمول",
     "Book, manage, and track your rental from anywhere.": "احجز، أدر، وتتبع رحلتك من أي مكان.",
+    "No cars found": "لا يوجد سيارات",
+    "Day": "يوم",
 
     "Roles": "المناصب",
     "Role": "المنصب",
@@ -79,6 +81,9 @@
     "Unavailable": "غير متاحة",
     "Available": "متاحة",
     "No reviews yet": "لا توجد تقييمات بعد",
+    "Reset": "إعادة تعيين",
+    "Previous": "السابق",
+    "Next": "التالي",
 
     "Bookings": "الحجوزات",
     "Booking": "الحجز",
