@@ -10,6 +10,16 @@ use Inertia\Inertia;
 
 class BookingController extends Controller
 {
+    public function index()
+    {
+        $user = Auth::user();
+        $bookings = Booking::with(['car', 'car.category', 'car.brand', 'bookingStatus'])->where('user_id', $user->id)->latest()->get();
+
+        return Inertia::render('bookings/booking-index', [
+            'bookings' => $bookings,
+        ]);
+    }
+
     public function create(Car $car)
     {
         return Inertia::render('bookings/create-booking', [
@@ -39,5 +49,20 @@ class BookingController extends Controller
                 ->with('error', $e->getMessage())
                 ->withInput();
         }
+    }
+
+    public function cancel(Booking $booking){
+
+        if(!in_array($booking->booking_status_id, ['1', '2'])){
+            return back()->with('error', __('This booking cannot be cancelled'));
+        }
+
+        $booking->update(['booking_status_id' => '3']);
+        return back()->with('success', __('Booking cancelled successfully!'));
+    }
+
+    public function delete(Booking $booking){
+        $booking->delete();
+        return back()->with('success', __('Booking deleted successfully!'));
     }
 }

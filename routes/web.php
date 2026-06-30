@@ -17,6 +17,7 @@ Route::post('/locale/{lang}', [LocaleController::class, 'switch'])->name('locale
 Route::middleware('auth')->group(function () {
 
     // Bookings
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
     Route::get('/bookings/add/{car}', [BookingController::class, 'create'])->name('bookings.create');
     Route::post('/bookings/add/{car}', [BookingController::class, 'store'])->name('bookings.store');
     Route::post('/bookings/cancel/{booking}', [BookingController::class, 'cancel'])->name('bookings.cancel');

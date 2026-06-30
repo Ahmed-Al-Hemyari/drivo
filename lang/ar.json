@@ -148,7 +148,12 @@
     "Refuse Bookings": "رفض الحجوزات",
     "Cancel Bookings": "إلغاء الحجوزات",
     "Update to Completed": "تحديث إلى مكتمل",
+    "From": "من",
+    "To": "إلى",
+    "Cancel": "إلغاء",
     "Booking No.": "الحجز رقم",
+    "Booking History": "تاريخ الحجوزات",
+    "Manage your rental requests, active reservations, and status timelines.": "إدارة طلبات التأجير، والحجوزات النشطة، والخطوط الزمنية للحالة.",
 
     "Booking Statuses": "حالات الحجوزات",
     "Booking Status": "حالة الحجز",
@@ -196,5 +201,8 @@
     "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى.",
     "Enter the color hex code starting with # (e.g., #000000)": "أدخل رمز اللون بصيغة Hex يبدأ بـ # (مثال: #000000)",
     "The color format must be a valid hex code like #000000.": "يجب أن يكون تنسيق اللون رمز Hex صحيحاً مثل #000000.",
-    "Request submitted successfully!": "تم إرسال الطلب بنجاح"
+    "Request submitted successfully!": "تم إرسال الطلب بنجاح",
+    "This booking cannot be cancelled": "لا يمكن إلغاء هذا الطلب حالياً",
+    "Booking cancelled successfully!": "تم إلغاء الطلب بنجاح",
+    "Booking deleted successfully!": "تم حذف الطلب بنجاح"
 }

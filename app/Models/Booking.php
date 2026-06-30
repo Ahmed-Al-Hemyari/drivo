@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
     'start_date',
     'end_date',
     'notes',
-    'status',
+    'booking_status_id',
     'rated',
     'user_id',
     'car_id'

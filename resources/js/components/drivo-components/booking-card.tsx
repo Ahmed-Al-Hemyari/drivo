@@ -1,133 +1,137 @@
-import React, { useState } from 'react';
-import { router, Link } from '@inertiajs/react';
-import noImage from '/public/images/no-image-car.svg';
+import React, { useMemo, useState } from 'react';
+import { router, usePage, Link } from '@inertiajs/react';
+import { useTrans } from '@/helpers/useTrans';
 import { Booking } from '@/types/types';
 
-interface BookingCardProps {
+interface Props {
   booking: Booking;
 }
 
-const BookingCard: React.FC<BookingCardProps> = ({ booking }) => {
-  const [isProcessing, setIsProcessing] = useState<boolean>(false);
+const BookingCard: React.FC<Props> = ({ booking }) => {
+  const { __ } = useTrans();
+  const locale = (usePage().props.locale as 'en' | 'ar') || 'en';
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  // Replaces Vue computed property 'canBeCancelled'
-  const canBeCancelled = ['pending', 'confirmed'].includes(booking.booking_status?.name_en ?? "");
+  // Isolate current English state key for conditional capability checking
+  const statusKey = useMemo(() => {
+    return (booking.booking_status?.name_en || '').toLowerCase();
+  }, [booking.booking_status]);
 
-  // Dynamic status design classes dictionary maps (replaces Vue switch computed)
-  const getStatusClasses = (status: string): string => {
-    const base = 'capitalize py-1 px-3 rounded-full text-sm font-medium';
+  // Determine if a booking can be cancelled
+  const canBeCancelled = useMemo(() => {
+    return ['pending', 'confirmed'].includes(statusKey);
+  }, [statusKey]);
 
-    const statusMap: Record<string, string> = {
-      pending: 'bg-yellow-100 text-yellow-700',
-      confirmed: 'bg-blue-100 text-blue-700',
-      cancelled: 'bg-red-100 text-red-700',
-      refused: 'bg-rose-100 text-rose-700',
-      active: 'bg-green-100 text-green-700',
-      expired: 'bg-gray-100 text-gray-700',
-      late: 'bg-orange-100 text-orange-700',
-    };
+  // Handle image mapping securely
+  const carImage = useMemo(() => {
+    if (booking.car?.images && booking.car.images.length > 0) {
+      return `/storage/${booking.car.images[0]}`;
+    }
+    return '/images/no-image-car.svg';
+  }, [booking.car?.images]);
 
-    return `${base} ${statusMap[status] || 'bg-gray-100 text-gray-700'}`;
-  };
-
-  // Date formatter helper function
-  const formatDate = (dateString: string): string => {
+  // Format localized dates nicely
+  const formatDate = (dateString?: string) => {
     if (!dateString) return '—';
     const d = new Date(dateString);
-    return d.toLocaleDateString('en-US', {
+    return d.toLocaleDateString(locale === 'ar' ? 'ar-SA-u-nu-latn' : 'en-US', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
     });
   };
 
-  // Cancel form submit handler
+  // Cancel processing logic
   const handleCancel = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!window.confirm('Are you sure you want to cancel this booking?')) return;
-    setIsProcessing(true);
+    if (!confirm(__('Are you sure you want to cancel this booking?'))) return;
 
-    router.post(
-      `/bookings/cancel/${booking.id}`,
-      {},
-      {
-        preserveScroll: true,
-        onFinish: () => setIsProcessing(false),
-        onError: () => alert('Failed to cancel booking. Please try again.'),
-      }
-    );
+    setIsProcessing(true);
+    router.post(`/bookings/cancel/${booking.id}`, {}, {
+      preserveScroll: true,
+      onFinish: () => setIsProcessing(false),
+    });
   };
 
   return (
-    <div className="flex flex-col md:flex-row justify-between bg-white border border-gray-200 hover:shadow-lg transition rounded-2xl p-4 w-full mx-auto my-3">
-      {/* Booking Info */}
-      <div className="flex flex-col md:flex-row items-center w-full">
-        {/* Car Image */}
-        <div className="flex-shrink-0">
+    <div className="flex flex-col md:flex-row justify-between bg-base-100 border border-base-200 hover:shadow-md transition-all duration-300 rounded-2xl p-4 w-full mx-auto my-3 gap-4">
+
+      {/* Left Segment: Car Graphics and Detailed Booking Specs */}
+      <div className="flex flex-col sm:flex-row items-center w-full gap-4">
+
+        {/* Car Image Thumbnail Block */}
+        <div className="shrink-0 relative w-32 h-24 rounded-xl overflow-hidden bg-base-200 border border-base-200">
           <img
-            className="mx-auto md:mr-4 w-32 h-24 object-cover rounded-xl border border-gray-200 bg-gray-50"
-            src={booking.car?.images ? `/storage/${booking.car?.images[0]}` : noImage}
-            alt="Car"
+            className="w-full h-full object-cover"
+            src={carImage}
+            alt={booking.car?.full_name || 'Car'}
+            onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-car.svg'; }}
           />
         </div>
 
-        {/* Booking Details */}
-        <div className="flex flex-col justify-between w-full md:w-auto mt-4 md:mt-0 text-center md:text-left space-y-3">
-          <h1 className="text-lg font-semibold text-gray-700">
-            Booking <span className="text-blue-600">#{booking.id}</span>
+        {/* Core Metadata Specifications Output */}
+        <div className="flex flex-col justify-between text-center sm:text-left rtl:sm:text-right space-y-2 w-full sm:w-auto">
+          <h1 className="text-md font-bold text-base-content/60">
+            {__('Booking')} <span className="text-(--color-primary-color)">#{booking.id}</span>
           </h1>
 
-          <h2 className="text-2xl font-bold text-gray-800">
-            {booking.car?.brand?.name_en} {booking.car?.name_en}{' '}
-            <span className="text-gray-500 text-sm font-normal">
-              ({booking.car?.category?.name_en})
+          <h2 className="text-xl font-black text-base-content">
+                {booking.car?.full_name}{' '}
+            <span className="text-base-content/50 text-xs font-medium block sm:inline">
+              ({booking.car?.category?.[`name_${locale}`]})
             </span>
           </h2>
 
-          <p className={getStatusClasses(booking.booking_status?.name_en ?? '')}>
-            {booking.booking_status?.name_en}
-          </p>
+          {/* Dynamic Status Capsule fueled by DB Columns */}
+          <div>
+            <span
+              className="inline-block capitalize py-0.5 px-3 rounded-full text-xs font-bold shadow-xs border border-black/5"
+              style={{
+                backgroundColor: booking.booking_status?.background_color || 'var(--fallback-b2)',
+                color: booking.booking_status?.font_color || 'var(--fallback-bc)',
+              }}
+            >
+              {booking.booking_status?.[`name_${locale}`]}
+            </span>
+          </div>
 
-          <p className="text-sm text-gray-600">
-            <span className="font-medium text-gray-700">From:</span>{' '}
-            {formatDate(booking.start_date)}
-            <span className="mx-1 text-gray-400"> – </span>
-            <span className="font-medium text-gray-700">To:</span>{' '}
-            {formatDate(booking.end_date)}
+          <p className="text-xs text-base-content/70 font-semibold">
+            <span className="text-base-content/40 font-medium">{__('From')}:</span> {formatDate(booking.start_date)}{' '}
+            <span className="mx-1 text-base-content/30">–</span>{' '}
+            <span className="text-base-content/40 font-medium">{__('To')}:</span> {formatDate(booking.end_date)}
           </p>
         </div>
       </div>
 
-      {/* Actions (Replaces sequential v-if / v-else-if / v-else conditionals) */}
-      <div className="flex flex-row md:flex-col items-center justify-center space-x-2 md:space-x-0 md:space-y-3 mt-5 md:mt-0">
+      {/* Right Segment: Context-Driven Execution Actions Layout */}
+      <div className="flex sm:flex-row md:flex-col items-center justify-center gap-2 shrink-0 border-t border-base-200 pt-3 md:pt-0 md:border-t-0">
         {canBeCancelled ? (
-          <form onSubmit={handleCancel}>
+          <form onSubmit={handleCancel} className="w-full sm:w-auto">
             <button
               type="submit"
               disabled={isProcessing}
-              className="px-5 py-2 text-sm font-medium text-white bg-yellow-500 hover:bg-yellow-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 transition disabled:opacity-50"
+              className="btn btn-warning btn-sm text-white font-bold rounded-xl px-5 normal-case w-full transition-all active:scale-98 disabled:opacity-50"
             >
-              Cancel
+              {isProcessing ? <span className="loading loading-spinner loading-xs"></span> : __('Cancel')}
             </button>
           </form>
-        ) : booking.booking_status?.name_en === 'completed' && booking.rated === false ? (
+        ) : statusKey === 'completed' && booking.rated === false ? (
           <Link
             href={`/rates/${booking.id}`}
-            className="px-5 py-2 text-sm font-medium text-white bg-red-500 hover:bg-red-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-300 transition"
+            className="btn bg-(--color-primary-color) hover:bg-(--color-primary-hover) border-none btn-sm text-white font-bold rounded-xl px-5 normal-case w-full sm:w-auto transition-all active:scale-98"
           >
-            Rate
+            {__('Rate')}
           </Link>
         ) : (
-          <form onSubmit={(e) => e.preventDefault()}>
-            <button
-              className="px-5 py-2 text-sm font-medium text-white bg-gray-400 rounded-lg cursor-not-allowed"
-              disabled
-            >
-              Cancel
-            </button>
-          </form>
+          <button
+            className="btn btn-sm bg-base-300 text-base-content/40 border-none rounded-xl px-5 normal-case cursor-not-allowed w-full sm:w-auto"
+            disabled
+          >
+            {__('Cancel')}
+          </button>
         )}
       </div>
+
     </div>
   );
 };
