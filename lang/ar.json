@@ -103,6 +103,15 @@
     "Book Now": "احجز الآن",
     "Back to Cars": "عودة إلى السيارات",
 
+    "Optional": "اختياري",
+    "Pick-Up Date": "تاريخ الإستلام",
+    "Return Date": "تاريخ الإرجاع",
+    "Rental Summary": "ملخص الحجز",
+    "Total Price": "إجمالي السعر",
+    "Add any custom requests or notes here...": "أضف أي طلبات خاصة أو ملاحظات هنا...",
+    "Confirm Booking": "تأكيد الحجز",
+    "Book": "احجز",
+
     "About Us": "عن الشركة",
     "Driven by convenience, powered by trust — we’re here to redefine the way you rent cars.": "مدفوعون بالراحة، مدعومون بالثقة — نحن هنا لإعادة تعريف الطريقة التي تستأجر بها السيارات.",
     "Our company was founded with a simple mission: to make car rental effortless, reliable, and tailored to your needs. Whether you're planning a weekend escape, attending a business meeting, or navigating daily life, we offer a wide selection of vehicles to match your journey — from fuel-efficient compacts to spacious SUVs and premium sedans.": "تأسست شركتنا بمهمة بسيطة: جعل استئجار السيارات سهلاً وموثوقاً ومصمماً خصيصاً لتلبية احتياجاتك. سواء كنت تخطط لرحلة عطلة نهاية الأسبوع، أو حضور اجتماع عمل، أو التنقل في حياتك اليومية، فإننا نقدم مجموعة واسعة من المركبات لتناسب رحلتك — من السيارات الصغيرة الاقتصادية إلى السيارات العائلية الفسيحة والسيدان الفاخرة.",
@@ -186,5 +195,6 @@
 
     "The selected period overlaps with an existing booking for this car.": "المدة المختارة تتعارض مع حجز موجود مسبقاً، يرجى اختيار مدة أخرى.",
     "Enter the color hex code starting with # (e.g., #000000)": "أدخل رمز اللون بصيغة Hex يبدأ بـ # (مثال: #000000)",
-    "The color format must be a valid hex code like #000000.": "يجب أن يكون تنسيق اللون رمز Hex صحيحاً مثل #000000."
+    "The color format must be a valid hex code like #000000.": "يجب أن يكون تنسيق اللون رمز Hex صحيحاً مثل #000000.",
+    "Request submitted successfully!": "تم إرسال الطلب بنجاح"
 }

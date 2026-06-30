@@ -57,7 +57,11 @@ class Car extends Model
     {
         return Attribute::make(
             get: function () {
-                $bookings = $this->bookings()->whereIn('status',['pending', 'confirmed', 'active'])->get(['start_date', 'end_date']);
+                $bookings = $this->bookings()
+                    ->whereHas('bookingStatus', function ($query) {
+                        $query->whereIn('name_en', ['Pending', 'Confirmed', 'Active']);
+                    })
+                    ->get(['start_date', 'end_date']);
                 $dates = [];
 
                 foreach ($bookings as $booking) {

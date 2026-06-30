@@ -16,18 +16,8 @@ return new class extends Migration
             $table->dateTime('start_date');
             $table->dateTime('end_date');
             $table->longText('notes')->nullable();
-            $table->enum('status', [
-                'pending',
-                'confirmed',
-                'cancelled',
-                'refused',
-                'active',
-                'expired',
-                'completed',
-                'late'
-            ])->default('pending');
             $table->boolean('rated')->default(false);
-            $table->foreignId('booking_status_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('booking_status_id')->default(1)->constrained()->cascadeOnDelete();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('car_id')->constrained()->cascadeOnDelete();
             $table->softDeletes();
