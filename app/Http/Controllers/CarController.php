@@ -32,7 +32,7 @@ class CarController extends Controller
 
     public function show(Car $car)
     {
-        $car->load(['brand', 'category', 'bookings', 'rates.user']);
+        $car->load(['brand', 'category', 'bookings', 'bookings.review']);
 
         return Inertia::render('cars/car-show', [
             'car' => $car,

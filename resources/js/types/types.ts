@@ -33,6 +33,8 @@ export type Car = {
     images?: Array<string>;
     rate?: number | null;
     is_available: boolean;
+    full_name: string;
+    reviews?: Review[];
 
     unavailable_dates: Array<string>;
 
@@ -84,6 +86,7 @@ export type Review = {
 
     booking_id: number;
     booking?: Booking;
+    user?: User;
 }
 
 export type MoneyTransaction = {

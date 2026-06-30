@@ -37,6 +37,7 @@ class Car extends Model
         'rate',
         'unavailable_dates',
         'is_available',
+        'full_name'
     ];
 
     public function rate(): Attribute

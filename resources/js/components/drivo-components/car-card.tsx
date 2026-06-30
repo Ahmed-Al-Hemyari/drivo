@@ -38,7 +38,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
             <div className="card-body p-6 gap-5 text-center items-center">
                 <div>
                     <h2 className="card-title text-xl font-bold text-base-content justify-center group-hover/card:text-(--color-primary-color) transition-colors">
-                        {carBrand} {carName}
+                        {car.full_name}
                     </h2>
                 </div>
 

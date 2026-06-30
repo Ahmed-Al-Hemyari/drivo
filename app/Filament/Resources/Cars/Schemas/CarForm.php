@@ -31,6 +31,7 @@ class CarForm
                             ->disk('public')
                             ->directory('uploads/img/cars')
                             ->visibility('public')
+                            ->acceptedFileTypes(['image/jpeg', 'image/png'])
                             ->saveUploadedFileUsing(function ($file, $get) {
                                 $brandId = $get('brand_id');
                                 $brandName = $brandId ? (Brand::find($brandId)?->name_en ?? 'brand') : 'generic';

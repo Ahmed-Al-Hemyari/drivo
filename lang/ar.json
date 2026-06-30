@@ -37,6 +37,7 @@
     "Book, manage, and track your rental from anywhere.": "احجز، أدر، وتتبع رحلتك من أي مكان.",
     "No cars found": "لا يوجد سيارات",
     "Day": "يوم",
+    "Availability": "التوفر",
 
     "Full name": "الاسم الكامل",
     "Email address": "البريد الإلكتروني",
@@ -99,6 +100,8 @@
     "Reset": "إعادة تعيين",
     "Previous": "السابق",
     "Next": "التالي",
+    "Book Now": "احجز الآن",
+    "Back to Cars": "عودة إلى السيارات",
 
     "About Us": "عن الشركة",
     "Driven by convenience, powered by trust — we’re here to redefine the way you rent cars.": "مدفوعون بالراحة، مدعومون بالثقة — نحن هنا لإعادة تعريف الطريقة التي تستأجر بها السيارات.",

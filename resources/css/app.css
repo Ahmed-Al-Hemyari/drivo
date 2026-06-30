@@ -160,3 +160,73 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Custom Premium Style Overrides for react-calendar */
+.custom-drivo-calendar .react-calendar {
+  width: 100% !important;
+  background: transparent !important;
+  border: none !important;
+  font-family: inherit;
+}
+
+.custom-drivo-calendar .react-calendar__navigation {
+  margin-bottom: 1rem;
+}
+
+.custom-drivo-calendar .react-calendar__navigation button {
+  color: var(--fallback-bc, initial);
+  font-weight: 700;
+  border-radius: 0.5rem;
+  min-width: 44px;
+  background: transparent;
+}
+
+.custom-drivo-calendar .react-calendar__navigation button:hover,
+.custom-drivo-calendar .react-calendar__navigation button:focus {
+  background-color: rgb(var(--fallback-b2, 242 242 242) / 0.5) !important;
+}
+
+.custom-drivo-calendar .react-calendar__month-view__weekdays {
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+.custom-drivo-calendar .react-calendar__month-view__weekdays__weekday abbr {
+  text-decoration: none !important;
+}
+
+.custom-drivo-calendar .react-calendar__tile {
+  padding: 0.75rem 0.5rem !important;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.custom-drivo-calendar .react-calendar__tile:enabled:hover,
+.custom-drivo-calendar .react-calendar__tile:enabled:focus {
+  background-color: rgb(var(--fallback-p, 57 140 112) / 0.15) !important;
+  color: var(--fallback-p, #398c70) !important;
+  outline: none;
+}
+
+/* Today's highlighting */
+.custom-drivo-calendar .react-calendar__tile--now {
+  background-color: rgb(var(--fallback-p, 57 140 112) / 0.15) !important;
+  color: var(--fallback-p, #398c70) !important;
+  border: 1px dashed var(--fallback-p, #398c70);
+}
+
+/* Booked Dates Styling override */
+.custom-drivo-calendar .booked-date-tile {
+  background-color: rgba(239, 68, 68, 0.12) !important;
+  color: #ef4444 !important;
+  text-decoration: line-through;
+  font-weight: 700;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
