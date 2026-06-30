@@ -45,7 +45,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
 
   return (
     <div className="min-h-screen bg-base-200/50 text-base-content transition-colors duration-300 pb-16">
-      <Head title={`${car.brand?.[`name_${locale}`] || ''} ${car.full_name}`} />
+      <Head title={`${car.full_name}`} />
 
       <Navbar elements={['Home', 'Cars', 'About']} />
 
@@ -109,7 +109,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
                 {car.category?.[`name_${locale}`]}
               </span>
               <h1 className="text-3xl sm:text-4xl font-black text-base-content mt-3 mb-2">
-                {car.brand?.[`name_${locale}`]} {car.full_name}
+                {car.full_name}
               </h1>
 
               <div className="flex items-baseline gap-1 mt-4">
@@ -140,10 +140,10 @@ const CarShow: React.FC<Props> = ({ car }) => {
               </h2>
               <div className="p-4 bg-base-200/40 rounded-2xl border border-base-200/70 shadow-xs overflow-hidden custom-drivo-calendar">
                 <Calendar
-                  tileClassName={tileClassName}
-                  locale={locale === 'ar' ? 'ar-SA' : 'en-US'}
-                  next2Label={null}
-                  prev2Label={null}
+                    tileClassName={tileClassName}
+                    locale={locale === 'ar' ? 'ar-SA-u-nu-latn' : 'en-US'}
+                    next2Label={null}
+                    prev2Label={null}
                 />
               </div>
             </div>
@@ -196,7 +196,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
           ) : (
             <div className="text-center py-12 text-base-content/40 font-medium border-2 border-dashed border-base-200 rounded-2xl">
               <i className="fa-regular fa-comment-dots text-3xl mb-2 block opacity-50"></i>
-              <p>{__('No reviews yet.')}</p>
+              <p>{__('No reviews yet')}</p>
             </div>
           )}
         </div>
