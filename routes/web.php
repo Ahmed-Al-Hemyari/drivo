@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::inertia('/', 'home')->name('home');
@@ -26,6 +27,10 @@ Route::middleware('auth')->group(function () {
     // Rate
     Route::get('/rates/{booking}', [ReviewController::class, 'create'])->name('bookings.create');
     Route::post('/rates/{booking}', [ReviewController::class, 'store'])->name('bookings.store');
+
+    // Profile
+    Route::get('/profile', [UserController::class, 'profile'])->name('profile');
+    Route::put('/profile/update', [UserController::class, 'update']);
 
 });
 

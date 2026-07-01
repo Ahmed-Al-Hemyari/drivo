@@ -40,7 +40,9 @@
     "Availability": "التوفر",
 
     "Full name": "الاسم الكامل",
+    "Full Name": "الاسم الكامل",
     "Email address": "البريد الإلكتروني",
+    "Email Address": "البريد الإلكتروني",
     "Forgot your password?": "نسيت كلمة المرور؟",
     "Remember me": "تذكرني",
     "Don't have an account? ": " لا تمتلك حساب؟ ",
@@ -52,6 +54,10 @@
     "Enter your details below to create your account": "أدخل معلوماتك أدناه ليتم إنشاء حساب خاص بك",
     "Log in to your account": "سجل الدخول إلى حسابك",
     "Enter your email and password below to log in": "ادخل البريد الإلكتروني وكلمة المرور أدناه لتسجيل الدخول",
+    "Save Changes": "حفظ التغييرات",
+    "Account Settings": "إعدادات الحساب",
+    "Manage your personal documentation information and contact details.": "إدارة معلومات الوثائق الشخصية وتفاصيل الاتصال.",
+    "Profile updated successfully": "تم تحديث الحساب بنجاح",
 
     "Roles": "المناصب",
     "Role": "المنصب",
