@@ -12,7 +12,6 @@ const Profile: React.FC = () => {
   const { data, setData, put, processing, errors, recentlySuccessful } = useForm({
     name: user.name || '',
     email: user.email || '',
-    phone_number: user.phone_number || '',
   });
 
   // Handle user avatar rendering securely
@@ -131,7 +130,7 @@ const Profile: React.FC = () => {
               </div>
 
               {/* Phone Input */}
-              <div className="form-control w-full">
+              {/* <div className="form-control w-full">
                 <label className="label font-bold text-xs text-base-content/70 uppercase tracking-wider">
                   {__('Phone Number')}
                 </label>
@@ -147,7 +146,7 @@ const Profile: React.FC = () => {
                 {errors.phone_number && (
                   <span className="text-error text-xs mt-1 font-medium">{errors.phone_number}</span>
                 )}
-              </div>
+              </div> */}
 
               {/* Submit Actions Area */}
               <div className="flex items-center justify-between border-t border-base-200 pt-5 mt-6">

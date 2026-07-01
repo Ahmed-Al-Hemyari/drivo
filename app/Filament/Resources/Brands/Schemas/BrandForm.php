@@ -23,6 +23,7 @@ class BrandForm
                             ->label(__('Logo'))
                             ->directory('brands')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png'])
                             ->required(fn (string $context) => $context === 'create')
                             ->dehydrated(fn ($state) => filled($state))
                             ->disk('public')

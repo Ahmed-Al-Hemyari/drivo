@@ -11,6 +11,7 @@ use Filament\Actions\ReplicateAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\IconSize;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
@@ -22,9 +23,12 @@ class UsersTable
     {
         return $table
             ->columns([
+                ImageColumn::make('avatar')->circular()->label(__('Avatar'))
+                    ->disk('public')
+                    ->defaultImageUrl('/images/no-image-user.webp'),
                 TextColumn::make('name')->searchable()->label(__('Name'))->sortable(),
                 TextColumn::make('email')->searchable()->label(__('Email'))->sortable(),
-                TextColumn::make('phone_number')->searchable()->label(__('Phone Number'))->sortable(),
+                // TextColumn::make('phone_number')->searchable()->label(__('Phone Number'))->sortable(),
                 TextColumn::make('role.label_' . app()->getLocale())
                     ->label(__('Role'))
                     ->placeholder('-')

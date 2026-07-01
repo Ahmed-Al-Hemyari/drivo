@@ -3,7 +3,7 @@ export type User = {
     name: string;
     email: string;
     avatar?: string;
-    phone_number?: string;
+    // phone_number?: string;
     role_id: number;
 
     role: Role;
