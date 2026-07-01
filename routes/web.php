@@ -31,7 +31,8 @@ Route::middleware('auth')->group(function () {
     // Profile
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::put('/profile/update', [UserController::class, 'update']);
-
+    Route::get('/reset-password', [UserController::class, 'resetPasswordView']);
+    Route::post('/update-password', [UserController::class, 'updatePassword']);
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {

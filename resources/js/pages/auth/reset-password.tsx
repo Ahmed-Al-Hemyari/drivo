@@ -1,96 +1,103 @@
-import { Form, Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
-import { update } from '@/routes/password';
+import { useTrans } from '@/helpers/useTrans';
 
 type Props = {
     token: string;
-    email: string;
     passwordRules: string;
 };
 
-export default function ResetPassword({ token, email, passwordRules }: Props) {
+export default function ResetPassword({ token, passwordRules }: Props) {
+    const { __ } = useTrans();
+
+    // 💡 Use standard Inertia form tracking at the top level
+    const { data, setData, post, processing, errors, reset } = useForm({
+        token: token,
+        old_password: '',
+        new_password: '',
+        new_password_confirmation: '',
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        // Replace this string route path with your password update backend route URL
+        post('/update-password', {
+            onSuccess: () => reset('old_password', 'new_password', 'new_password_confirmation'),
+        });
+    };
+
     return (
         <>
-            <Head title="Reset password" />
+            <Head title={__("Reset password")} />
 
-            <Form
-                {...update.form()}
-                transform={(data) => ({ ...data, token, email })}
-                resetOnSuccess={['password', 'password_confirmation']}
-            >
-                {({ processing, errors }) => (
-                    <div className="grid gap-6">
-                        <div className="grid gap-2">
-                            <Label htmlFor="email">Email</Label>
-                            <Input
-                                id="email"
-                                type="email"
-                                name="email"
-                                autoComplete="email"
-                                value={email}
-                                className="mt-1 block w-full"
-                                readOnly
-                            />
-                            <InputError
-                                message={errors.email}
-                                className="mt-2"
-                            />
-                        </div>
+            {/* 💡 Plain standard HTML form to handle submission cleanly */}
+            <form onSubmit={handleSubmit} className="grid gap-6">
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password">Password</Label>
-                            <PasswordInput
-                                id="password"
-                                name="password"
-                                autoComplete="new-password"
-                                className="mt-1 block w-full"
-                                autoFocus
-                                placeholder="Password"
-                                passwordrules={passwordRules}
-                            />
-                            <InputError message={errors.password} />
-                        </div>
+                {/* Old Password Field */}
+                <div className="grid gap-2">
+                    <Label htmlFor="old_password">{__("Old password")}</Label>
+                    <PasswordInput
+                        id="old_password"
+                        name="old_password"
+                        autoComplete="current-password"
+                        className="mt-1 block w-full"
+                        autoFocus
+                        placeholder={__("Old password")}
+                        passwordrules={passwordRules}
+                        value={data.old_password}
+                        onChange={(e) => setData('old_password', e.target.value)}
+                    />
+                    <InputError message={errors.old_password} />
+                </div>
 
-                        <div className="grid gap-2">
-                            <Label htmlFor="password_confirmation">
-                                Confirm password
-                            </Label>
-                            <PasswordInput
-                                id="password_confirmation"
-                                name="password_confirmation"
-                                autoComplete="new-password"
-                                className="mt-1 block w-full"
-                                placeholder="Confirm password"
-                                passwordrules={passwordRules}
-                            />
-                            <InputError
-                                message={errors.password_confirmation}
-                                className="mt-2"
-                            />
-                        </div>
+                {/* New Password Field */}
+                <div className="grid gap-2">
+                    <Label htmlFor="new_password">{__("New password")}</Label>
+                    <PasswordInput
+                        id="new_password"
+                        name="new_password"
+                        autoComplete="new-password"
+                        className="mt-1 block w-full"
+                        placeholder={__("New password")}
+                        passwordrules={passwordRules}
+                        value={data.new_password}
+                        onChange={(e) => setData('new_password', e.target.value)}
+                    />
+                    <InputError message={errors.new_password} />
+                </div>
 
-                        <Button
-                            type="submit"
-                            className="mt-4 w-full"
-                            disabled={processing}
-                            data-test="reset-password-button"
-                        >
-                            {processing && <Spinner />}
-                            Reset password
-                        </Button>
-                    </div>
-                )}
-            </Form>
+                {/* Password Confirmation Field */}
+                <div className="grid gap-2">
+                    <Label htmlFor="new_password_confirmation">
+                        {__("Confirm new password")}
+                    </Label>
+                    <PasswordInput
+                        id="new_password_confirmation"
+                        name="new_password_confirmation"
+                        autoComplete="new-password"
+                        className="mt-1 block w-full"
+                        placeholder={__("Confirm new password")}
+                        passwordrules={passwordRules}
+                        value={data.new_password_confirmation}
+                        onChange={(e) => setData('new_password_confirmation', e.target.value)}
+                    />
+                    <InputError message={errors.new_password_confirmation} className="mt-2" />
+                </div>
+
+                <Button
+                    type="submit"
+                    className="mt-4 w-full bg-(--color-primary-color) hover:bg-(--color-primary-hover)"
+                    disabled={processing}
+                    data-test="reset-password-button"
+                >
+                    {processing && <Spinner />}
+                    {__('Reset password')}
+                </Button>
+            </form>
         </>
     );
 }
-
-ResetPassword.layout = {
-    title: 'Reset password',
-    description: 'Please enter your new password below',
-};

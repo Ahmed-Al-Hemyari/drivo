@@ -136,6 +136,13 @@ const Navbar: React.FC<NavbarProps> = ({ elements }) => {
                     </Link>
                 </li>
 
+                <li>
+                    <Link href="/reset-password" className="flex items-center gap-3 py-2.5 rounded-xl hover:bg-base-200">
+                    <i className="fa-regular fa-calendar-check text-base opacity-70 w-4"></i>
+                    <span>{__('Reset Password')}</span>
+                    </Link>
+                </li>
+
                 <div className="divider my-1 opacity-60"></div>
 
                 <li>

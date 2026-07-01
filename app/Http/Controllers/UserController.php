@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Settings\PasswordUpdateRequest;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Inertia\Inertia;
+use Illuminate\Validation\Rules\Password;
 
 class UserController extends Controller
 {
@@ -33,5 +37,35 @@ class UserController extends Controller
         $user->update($formFields);
 
         return redirect('/')->with('success', __('Profile updated successfully'));
+    }
+
+    public function resetPasswordView(Request $request, User $user) {
+        return Inertia::render('auth/reset-password', [
+            'token' => $request->route('token'),
+            'passwordRules' => Password::defaults()->toPasswordRulesString(),
+            'title' => __('Reset password'),
+            'description' => __('Please enter your old pasword along with new password below'),
+        ]);
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+        $user = $request->user();
+        $request->validate([
+            'old_password' => ['required'],
+            'new_password' => ['required', 'min:8', 'confirmed', Password::defaults()],
+        ]);
+
+        if (!Hash::check($request->old_password, $user->password)) {
+            return back()->withErrors([
+                'old_password' => __('The provided password does not match your current password.')
+            ]);
+        }
+
+        $user->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect('/')->with('success', __('Password updated successfully!'));
     }
 }
