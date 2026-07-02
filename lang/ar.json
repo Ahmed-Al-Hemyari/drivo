@@ -67,6 +67,10 @@
     "Confirm new password": "تأكيد كلمة المرور الجديدة",
     "Password updated successfully!": "تم تحديث كلمة المرور بنجاح",
     "The provided password does not match your current password.": "كلمة المرور القديمة المدخلة أدناه لا تتطابق مع كلمة المرور المحفوظة لدينا",
+    "Premium car rental service offering an effortless engineering fleet for your ultimate journey experience.": "خدمة تأجير سيارات فاخرة تقدم أسطولاً هندسياً متميزاً لتجربة رحلة استثنائية ومريحة.",
+    "Navigation": "التنقل",
+    "Connect With Us": "تواصل معنا",
+    "DRIVO. All rights reserved.": "دريفو. جميع الحقوق محفوظة.",
 
     "Roles": "المناصب",
     "Role": "المنصب",
@@ -97,9 +101,14 @@
     "Logo": "الشعار",
     "URL": "الرابط",
     "Visit Website": "زيارة الموقع",
+    "Top Brands Available": "أفضل العلامات التجارية المتاحة",
+    "Drive absolute quality from trusted global engineering fleets": "قد بفخامة مطلقة من أساطيل هندسية عالمية موثوقة",
 
     "Categories": "الفئات",
     "Category": "الفئة",
+    "Icon": "الأيقونة",
+    "Browse by Category": "تصفح حسب الفئة",
+    "Find the perfect ride tailored to your specific journey needs": "اعثر على رحلتك المثالية المصممة خصيصًا لتلبي احتياجات تنقلك",
 
     "Cars": "السيارات",
     "Car": "السيارة",

@@ -25,9 +25,8 @@ export default function Rate({ booking }: Props) {
     return (
         <div className="min-h-screen bg-base-200/50 text-base-content pb-16">
             <Head title={__("Rate Your Experience")} />
-            <Navbar elements={['Home', 'Cars', 'About']} />
 
-            <div className="max-w-xl mx-auto px-4 mt-12">
+            <div className="max-w-xl mx-auto px-4 pt-12">
                 <div className="bg-base-100 border border-base-200 p-6 sm:p-8 rounded-3xl shadow-xs">
 
                     <div className="text-center mb-6">

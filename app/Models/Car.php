@@ -132,13 +132,29 @@ class Car extends Model
         });
 
         $query->when($filters['brand'] ?? null, function ($q, $brand) {
-            $locale = app()->getLocale();
-            $q->whereHas('brand', fn($q2) => $q2->where("name_{$locale}", 'like', "%$brand%"));
+            $q->whereHas('brand', function ($q2) use ($brand) {
+                if (is_numeric($brand)) {
+                    $q2->where('id', $brand);
+                } else {
+                    $q2->where(function ($sub) use ($brand) {
+                        $sub->where('name_en', 'like', "%{$brand}%")
+                            ->orWhere('name_ar', 'like', "%{$brand}%");
+                    });
+                }
+            });
         });
 
         $query->when($filters['category'] ?? null, function ($q, $category) {
-            $locale = app()->getLocale();
-            $q->whereHas('category', fn($q2) => $q2->where("name_{$locale}", 'like', "%$category%"));
+            $q->whereHas('category', function ($q2) use ($category) {
+                if (is_numeric($category)) {
+                    $q2->where('id', $category);
+                } else {
+                    $q2->where(function ($sub) use ($category) {
+                        $sub->where('name_en', 'like', "%{$category}%")
+                            ->orWhere('name_ar', 'like', "%{$category}%");
+                    });
+                }
+            });
         });
 
         $query->when($filters['price'] ?? null, function ($q, $price) {

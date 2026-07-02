@@ -17,7 +17,6 @@ const About: React.FC = () => {
     /* 🎨 Layer 0: Page Canvas Layout */
     <div className="min-h-screen bg-base-200/50 text-base-content transition-colors duration-300">
       {/* Dynamic Theme Compatible Navbar */}
-      <Navbar elements={['Home', 'Cars', 'About']} />
 
       {/* Main Container Layout */}
       <section className="max-w-5xl mx-auto px-6 py-16 md:py-24">

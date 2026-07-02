@@ -6,9 +6,17 @@ use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
-Route::inertia('/', 'home')->name('home');
-Route::inertia('/about', 'about')->name('about');
+Route::get('/', function () {
+    return Inertia::render('home', [
+        'categories' => \App\Models\Category::all(),
+        'brands' => \App\Models\Brand::all(),
+    ]);
+})->name('home');
+Route::get('/about', function () {
+    return Inertia::render('about');
+})->name('about');
 Route::get('/cars', [CarController::class, 'index'])->name('cars.webIndex');
 Route::get('/cars/{car}', [CarController::class, 'show'])->name('cars.webShow');
 
@@ -35,8 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/update-password', [UserController::class, 'updatePassword']);
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::inertia('/', 'home')->name('home');
-});
+// Route::middleware(['auth', 'verified'])->group(function () {
+//     Route::inertia('/', 'home')->name('home');
+// });
 
 require __DIR__.'/settings.php';

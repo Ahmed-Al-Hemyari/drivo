@@ -17,6 +17,7 @@ export type Category = {
     id: number;
     name_en: string;
     name_ar: string;
+    icon: string;
 }
 
 export type LinkItem = {

@@ -32,9 +32,7 @@ const Profile: React.FC = () => {
     <div className="min-h-screen bg-base-200/50 text-base-content transition-colors duration-300 pb-16">
       <Head title={__('My Profile')} />
 
-      <Navbar elements={['Home', 'Cars', 'About']} />
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 mt-10">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-10">
 
         {/* Page Header */}
         <div className="mb-8 text-center sm:text-left rtl:sm:text-right">

@@ -27,7 +27,6 @@ const CarIndex: React.FC<CarIndexProps> = ({ cars, brands, categories, filters }
 
     return (
         <div className='min-h-screen bg-base-200/40 text-base-content transition-colors'>
-            <Navbar elements={['Home', 'Cars', 'About']}/>
             <Search route='cars'/>
             <Filter brands={brands} categories={categories} filters={filters}/>
 

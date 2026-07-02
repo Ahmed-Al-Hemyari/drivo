@@ -11,6 +11,7 @@ use Filament\Actions\ReplicateAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Support\Enums\IconSize;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -21,6 +22,9 @@ class CategoriesTable
     {
         return $table
             ->columns([
+                ImageColumn::make('icon')->circular()->label(__('Icon'))
+                    ->disk('public')
+                    ->defaultImageUrl('/default-logo.png'),
                 TextColumn::make('name_en')
                     ->label(__('English Name'))
                     ->searchable()

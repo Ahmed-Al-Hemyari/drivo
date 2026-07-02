@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['name_en', 'name_ar'])]
+#[Fillable(['name_en', 'name_ar', 'icon'])]
 class Category extends Model
 {
     use HasFactory, SoftDeletes;

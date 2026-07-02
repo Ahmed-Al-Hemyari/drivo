@@ -60,9 +60,7 @@ const CreateBooking: React.FC<Props> = ({ car }) => {
     <div className="min-h-screen bg-base-200/50 text-base-content transition-colors duration-300 pb-16">
       <Head title={`${__('Book')} ${car.full_name}`} />
 
-      <Navbar elements={['Home', 'Cars', 'About']} />
-
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 mt-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 pt-8">
 
         {/* Back Link */}
         <Link
