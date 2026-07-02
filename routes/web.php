@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\OAuthController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,9 @@ Route::get('/about', function () {
 })->name('about');
 Route::get('/cars', [CarController::class, 'index'])->name('cars.webIndex');
 Route::get('/cars/{car}', [CarController::class, 'show'])->name('cars.webShow');
+
+Route::get('/oauth/google/redirect', [OAuthController::class, 'redirectToGoogle'])->name('oauth.google.redirect');
+Route::get('/oauth/google/callback', [OAuthController::class, 'handleGoogleCallback']);
 
 // Language Switch
 Route::post('/locale/{lang}', [LocaleController::class, 'switch'])->name('locale.switch');

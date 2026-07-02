@@ -18,6 +18,10 @@ type Props = {
     canResetPassword: boolean;
 };
 
+const handleGoogleLogin = () => {
+    window.location.href = '/oauth/google/redirect';
+};
+
 export default function Login({ status, canResetPassword }: Props) {
     const { __ } = useTrans();
     const { locale } = usePage().props;
@@ -94,6 +98,46 @@ export default function Login({ status, canResetPassword }: Props) {
                                 {processing && <Spinner />}
                                 {__("Log in")}
                             </Button>
+                            <div className="relative my-6">
+                                <div className="absolute inset-0 flex items-center">
+                                    <div className="w-full border-t border-base-200/80"></div>
+                                </div>
+                                <div className="relative flex justify-center text-xs uppercase font-bold tracking-wider">
+                                    <span className="bg-base-100 px-3 text-base-content/40">{__('Or log in with')}</span>
+                                </div>
+                            </div>
+
+                            {/* OAuth Provider Grid */}
+                            <div className="grid grid-cols-1 gap-3 w-full">
+                                {/* ─── Google Gradient Border Wrapper (Stays bright on both themes) ─── */}
+                                <div className="bg-gradient-to-r from-[#EA4335] via-[#FBBC05] via-[#34A853] to-[#4285F4] p-[1.5px] rounded-2xl transition-all duration-200 active:scale-[0.98]">
+
+                                    <button
+                                        type="button"
+                                        onClick={() => handleGoogleLogin()}
+                                        className="w-full bg-base-100 dark:bg-[#1e232d] hover:bg-base-200/70 dark:hover:bg-[#252b37] rounded-[14px] h-16 px-5 flex items-center justify-center gap-4 transition-colors duration-200"
+                                    >
+                                        {/* Left: Prominent Google Icon */}
+                                        <img
+                                            src="/images/google-logo.png"
+                                            alt="Google"
+                                            className="h-8 w-8 object-contain"
+                                        />
+
+                                        {/* Right: Stacked Text Fields */}
+                                        <div className="flex flex-col items-start text-left">
+                                            <span className="text-base-content dark:text-white font-bold text-base tracking-tight leading-tight">
+                                                {__('Continue with Google')}
+                                            </span>
+                                            <span className="text-base-content/60 dark:text-gray-400 text-xs font-medium mt-0.5">
+                                                {__('One-click sign in')}
+                                            </span>
+                                        </div>
+
+                                    </button>
+
+                                </div>
+                            </div>
                         </div>
 
                         <div className="text-center text-sm text-muted-foreground">

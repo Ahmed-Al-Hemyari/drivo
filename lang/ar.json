@@ -77,6 +77,10 @@
     "Change": "تغيير",
     "Remove": "إزالة",
     "Saved successfully!": "تم الحفظ بنجاح!",
+    "Or register with": "أو سجل باستخدام",
+    "Or log in with": "أو سجل الدخول باستخدام",
+    "Continue with Google": "متابعة مع Google",
+    "One-click sign in": "تسجيل الدخول بنقرة واحدة",
 
     "Roles": "المناصب",
     "Role": "المنصب",
@@ -245,5 +249,6 @@
     "This booking cannot be cancelled": "لا يمكن إلغاء هذا الطلب حالياً",
     "Booking cancelled successfully!": "تم إلغاء الطلب بنجاح",
     "Booking deleted successfully!": "تم حذف الطلب بنجاح",
-    "Thank you for rating": "شكراً لك على التقييم"
+    "Thank you for rating": "شكراً لك على التقييم",
+    "Google authentication failed. Please try again.": "فشل تسجيل الدخول عبر جوجل. يرجى المحاولة مرة أخرى."
 }
