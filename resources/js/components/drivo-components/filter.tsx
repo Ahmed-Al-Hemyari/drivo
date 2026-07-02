@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { router, usePage } from '@inertiajs/react';
-import { Brand, Category } from '@/types/types';
+import React, { useState } from 'react';
 import { useTrans } from '@/helpers/useTrans';
+import type { Brand, Category } from '@/types/types';
 
 interface FilterProps {
   filters?: { brand?: string; category?: string; price?: string; rate?: string };
@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({ filters: initialFilters, brands = [], c
   const handleFilterChange = (key: keyof typeof filters, value: string) => {
     const updatedFilters = { ...filters, [key]: value };
     setFilters(updatedFilters);
-    const query = Object.fromEntries(Object.entries(updatedFilters).filter(([_, v]) => v !== ''));
+    const query = Object.fromEntries(Object.entries(updatedFilters).filter((entry) => entry[1] !== ''));
     router.get('/cars', query, { preserveScroll: true, replace: true });
   };
 
@@ -50,6 +50,7 @@ const Filter: React.FC<FilterProps> = ({ filters: initialFilters, brands = [], c
           <option value="">{__('Brand')}</option>
           {brands.map((brand) => {
             const localizedName = brand?.[`name_${locale}`] || brand.name_en;
+
             return <option key={brand.id} value={localizedName}>{localizedName}</option>;
           })}
         </select>
@@ -65,6 +66,7 @@ const Filter: React.FC<FilterProps> = ({ filters: initialFilters, brands = [], c
           <option value="">{__('Category')}</option>
           {categories.map((category) => {
             const localizedName = category?.[`name_${locale}`] || category.name_en;
+
             return <option key={category.id} value={localizedName}>{localizedName}</option>;
           })}
         </select>

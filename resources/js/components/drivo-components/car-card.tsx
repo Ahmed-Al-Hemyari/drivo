@@ -1,7 +1,7 @@
-import React from 'react';
 import { Link, usePage } from '@inertiajs/react';
-import { Car } from '@/types/types';
+import React from 'react';
 import { useTrans } from '@/helpers/useTrans';
+import type { Car } from '@/types/types';
 
 interface CarCardProps {
   car: Car;

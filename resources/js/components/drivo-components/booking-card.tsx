@@ -1,7 +1,7 @@
-import React, { useMemo, useState } from 'react';
 import { router, usePage, Link } from '@inertiajs/react';
+import React, { useMemo, useState } from 'react';
 import { useTrans } from '@/helpers/useTrans';
-import { Booking } from '@/types/types';
+import type { Booking } from '@/types/types';
 
 interface Props {
   booking: Booking
@@ -24,17 +24,17 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
     if (booking.car?.images && booking.car.images.length > 0) {
       return `/storage/${booking.car.images[0]}`;
     }
-    return '/images/no-image-car.svg';
-  }, [booking.car?.images]);
 
-  const formatMoney = (value?: number | string) => {
-    const num = parseFloat(String(value || 0)).toFixed(2);
-    return locale === 'ar' ? `ر ${num}` : `${num} SAR`;
-  };
+    return '/images/no-image-car.svg';
+  }, [booking.car]);
 
   const formatDate = (dateString?: string) => {
-    if (!dateString) return '—';
+    if (!dateString) {
+return '—';
+}
+
     const d = new Date(dateString);
+
     return d.toLocaleDateString(locale === 'ar' ? 'ar-SA-u-nu-latn' : 'en-US', {
       year: 'numeric',
       month: 'short',
@@ -44,7 +44,10 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
 
   const handleCancel = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!confirm(__('Are you sure you want to cancel this booking?'))) return;
+
+    if (!confirm(__('Are you sure you want to cancel this booking?'))) {
+return;
+}
 
     setIsProcessing(true);
     router.post(`/bookings/cancel/${booking.id}`, {}, {
@@ -83,7 +86,9 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
               className="w-full h-full object-cover"
               src={carImage}
               alt={booking.car?.full_name || 'Car'}
-              onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-car.svg'; }}
+              onError={(e) => {
+ (e.target as HTMLImageElement).src = '/images/no-image-car.svg';
+}}
             />
           </div>
 

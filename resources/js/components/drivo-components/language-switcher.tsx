@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
 import { router, usePage } from '@inertiajs/react';
+import React, { useEffect } from 'react';
 
 export function LanguageSwitcher() {
   const { locale } = usePage().props as any; // 'en' or 'ar'
@@ -11,7 +11,9 @@ export function LanguageSwitcher() {
   }, [locale]);
 
   const changeLanguage = (lang: 'en' | 'ar') => {
-    if (lang === locale) return;
+    if (lang === locale) {
+return;
+}
 
     router.post(`/locale/${lang}`, {}, {
       preserveScroll: true,

@@ -1,8 +1,7 @@
 import { Head, useForm } from '@inertiajs/react';
-import Navbar from '@/components/drivo-components/navbar';
 import InputError from '@/components/input-error';
 import { useTrans } from '@/helpers/useTrans';
-import { Booking } from '@/types/types';
+import type { Booking } from '@/types/types';
 
 type Props = {
     booking: Booking;

@@ -1,10 +1,10 @@
-import React from 'react';
 import { Link, router, usePage } from '@inertiajs/react';
+import React from 'react';
 import { useTrans } from '@/helpers/useTrans';
-import { User } from '@/types';
+import type { User } from '@/types';
+import FlashMessages from './flash-messages';
 import { LanguageSwitcher } from './language-switcher';
 import ThemeSwitcher from './theme-switcher';
-import FlashMessages from './flash-messages';
 
 interface PageProps {
   auth: { user: User | null };

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { usePage } from '@inertiajs/react';
+import React, { useEffect, useState } from 'react';
 
 const FlashMessages: React.FC = () => {
   const { flash } = usePage().props as any;
@@ -9,22 +9,31 @@ const FlashMessages: React.FC = () => {
   useEffect(() => {
     // Check if any flash message keys exist in the current page props
     if (flash?.success) {
+      /* eslint-disable react-hooks/set-state-in-effect */
       setMessage({ type: 'success', text: flash.success });
       setVisible(true);
+      /* eslint-enable react-hooks/set-state-in-effect */
     } else if (flash?.error) {
+       
       setMessage({ type: 'error', text: flash.error });
       setVisible(true);
+       
     } else if (flash?.info) {
+       
       setMessage({ type: 'info', text: flash.info });
       setVisible(true);
+       
     }
 
     // Automatically fade out the notification banner after 4 seconds
     const timer = setTimeout(() => setVisible(false), 4000);
-    return () => clearTimeout(timer);
-  }, [flash]); // Re-fires instantly whenever Inertia redirects or updates properties
 
-  if (!visible || !message) return null;
+    return () => clearTimeout(timer);
+  }, [flash]);
+
+  if (!visible || !message) {
+return null;
+}
 
   return (
     <div className="toast toast-top toast-end z-50 mt-16 p-4 animate-in fade-in slide-in-from-top-4 duration-300">

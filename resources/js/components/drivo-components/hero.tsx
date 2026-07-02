@@ -1,5 +1,5 @@
-import React from 'react';
 import { Link } from '@inertiajs/react';
+import React from 'react';
 import { useTrans } from '@/helpers/useTrans';
 
 const Hero: React.FC = () => {

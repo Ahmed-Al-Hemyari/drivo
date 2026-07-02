@@ -1,7 +1,7 @@
-import React, { useMemo, useRef, useState } from 'react';
 import { Head, useForm, usePage } from '@inertiajs/react';
+import React, { useMemo, useRef, useState } from 'react';
 import { useTrans } from '@/helpers/useTrans';
-import { User } from '@/types';
+import type { User } from '@/types';
 
 const Profile: React.FC = () => {
   const { __ } = useTrans();
@@ -23,14 +23,17 @@ const Profile: React.FC = () => {
     if (data.avatar) {
       return URL.createObjectURL(data.avatar);
     }
+
     if (user.avatar && !deleteAvatarRequested) {
       return `/storage/${user.avatar}`;
     }
+
     return '/images/no-image-user.webp';
   }, [user.avatar, data.avatar, deleteAvatarRequested]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
+
     if (files && files[0]) {
       setDeleteAvatarRequested(false);
       setData((oldData) => ({
@@ -43,7 +46,11 @@ const Profile: React.FC = () => {
 
   const handleDeleteAvatar = () => {
     setDeleteAvatarRequested(true);
-    if (fileInputRef.current) fileInputRef.current.value = '';
+
+    if (fileInputRef.current) {
+fileInputRef.current.value = '';
+}
+
     setData((oldData) => ({
       ...oldData,
       avatar: null,
@@ -99,7 +106,9 @@ const Profile: React.FC = () => {
                   src={userAvatarPreview}
                   alt={user.name}
                   className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105"
-                  onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-user.webp'; }}
+                  onError={(e) => {
+ (e.target as HTMLImageElement).src = '/images/no-image-user.webp'; 
+}}
                 />
                 <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                   <i className="fa-solid fa-camera text-white text-lg"></i>

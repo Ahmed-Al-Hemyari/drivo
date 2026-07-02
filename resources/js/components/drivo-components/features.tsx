@@ -1,5 +1,5 @@
-import { useTrans } from '@/helpers/useTrans';
 import React from 'react';
+import { useTrans } from '@/helpers/useTrans';
 
 const FeaturesSection = () => {
     const { __ } = useTrans();

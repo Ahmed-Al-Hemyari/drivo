@@ -1,6 +1,5 @@
-import { Form, Head, usePage } from '@inertiajs/react';
+import { Form, Head } from '@inertiajs/react';
 import InputError from '@/components/input-error';
-import PasskeyVerify from '@/components/passkey-verify';
 import PasswordInput from '@/components/password-input';
 import TextLink from '@/components/text-link';
 import { Button } from '@/components/ui/button';
@@ -8,10 +7,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
+import { useTrans } from '@/helpers/useTrans';
 import { register } from '@/routes';
 import { store } from '@/routes/login';
-import { request } from '@/routes/password';
-import { useTrans } from '@/helpers/useTrans';
 
 type Props = {
     status?: string;
@@ -22,9 +20,8 @@ const handleGoogleLogin = () => {
     window.location.href = '/oauth/google/redirect';
 };
 
-export default function Login({ status, canResetPassword }: Props) {
+export default function Login({ status }: Props) {
     const { __ } = useTrans();
-    const { locale } = usePage().props;
 
     return (
         <>

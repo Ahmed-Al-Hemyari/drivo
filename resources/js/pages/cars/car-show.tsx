@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
 import { Link, Head, usePage } from '@inertiajs/react';
-import Navbar from '@/components/drivo-components/navbar';
-import { useTrans } from '@/helpers/useTrans';
+import React, { useMemo, useState } from 'react';
 import Calendar from 'react-calendar';
+import { useTrans } from '@/helpers/useTrans';
 import 'react-calendar/dist/Calendar.css';
-import { Car } from '@/types/types';
+import type { Car } from '@/types/types';
 
 interface Props {
   car: Car;
@@ -19,6 +18,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
     if (car.images && car.images.length > 0) {
       return car.images.map(img => `/storage/${img}`);
     }
+
     return ['/images/no-image-car.svg'];
   }, [car.images]);
 
@@ -40,6 +40,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
     if (bookedDates.has(dateString)) {
       return 'booked-date-tile';
     }
+
     return null;
   };
 
@@ -170,7 +171,9 @@ const CarShow: React.FC<Props> = ({ car }) => {
                       <img
                         src={review.user?.avatar ? `/storage/${review.user.avatar}` : '/images/no-image-user.webp'}
                         alt={review.user?.name}
-                        onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-user.webp'; }}
+                        onError={(e) => {
+ (e.target as HTMLImageElement).src = '/images/no-image-user.webp';
+}}
                       />
                     </div>
                   </div>

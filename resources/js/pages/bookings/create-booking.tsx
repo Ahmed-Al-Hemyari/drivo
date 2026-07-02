@@ -1,9 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
 import { Link, Head, useForm, usePage } from '@inertiajs/react';
-import Navbar from '@/components/drivo-components/navbar';
+import React, { useMemo } from 'react';
 import { useTrans } from '@/helpers/useTrans';
-import { Car } from '@/types/types';
-import { User } from '@/types';
+import type { Car } from '@/types/types';
 
 interface Props {
   car: Car;
@@ -13,7 +11,6 @@ interface Props {
 const CreateBooking: React.FC<Props> = ({ car, vat }) => {
   const { __ } = useTrans();
   const locale = (usePage().props.locale as 'en' | 'ar') || 'en';
-  const user = usePage().props.auth.user as User;
 
   // Initialize the Inertia form context hook
   const { data, setData, post, processing, errors } = useForm({
@@ -27,31 +24,36 @@ const CreateBooking: React.FC<Props> = ({ car, vat }) => {
     if (car.images && car.images.length > 0) {
       return `/storage/${car.images[0]}`;
     }
+
     return '/images/no-image-car.svg';
   }, [car.images]);
 
   // Compute duration automatically in pure React lifecycle
-  const rentalDuration = useMemo(() => {
-    if (!data.start_date || !data.end_date) return 0;
+    const rentalDuration = useMemo(() => {
+        if (!data.start_date || !data.end_date) {
+    return 0;
+    }
+
     const start = new Date(data.start_date);
     const end = new Date(data.end_date);
     const diffMs = end.getTime() - start.getTime();
     const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+
     return diffDays > 0 ? diffDays : 0;
   }, [data.start_date, data.end_date]);
 
-  // Compute price total
-  const computedTotalAmount = useMemo(() => {
-    return rentalDuration * (car?.daily_price || 0);
-  }, [rentalDuration, car?.daily_price]);
+    // Compute price total
+    const computedTotalAmount = useMemo(() => {
+        return rentalDuration * (car?.daily_price || 0);
+    }, [rentalDuration, car]);
 
-  const computedVAT = useMemo(() => {
-    return vat * computedTotalAmount;
-  }, [rentalDuration, car?.daily_price]);
+    const computedVAT = useMemo(() => {
+        return vat * computedTotalAmount;
+    }, [vat, computedTotalAmount]);
 
-  const computedTotalAmountWithVAT = useMemo(() => {
-    return computedVAT + computedTotalAmount;
-  }, [rentalDuration, car?.daily_price]);
+    const computedTotalAmountWithVAT = useMemo(() => {
+        return computedTotalAmount + computedVAT;
+    }, [computedTotalAmount, computedVAT]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,7 +85,9 @@ const CreateBooking: React.FC<Props> = ({ car, vat }) => {
                 src={carImage}
                 alt={car.full_name}
                 className="w-full h-full object-cover"
-                onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-car.svg'; }}
+                onError={(e) => {
+ (e.target as HTMLImageElement).src = '/images/no-image-car.svg';
+}}
               />
             </div>
             <span className="text-xs uppercase tracking-wider font-bold text-(--color-primary-color) bg-(--color-primary-color)/10 px-3 py-1 rounded-full inline-block mt-4">

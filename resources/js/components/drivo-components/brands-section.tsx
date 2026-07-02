@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTrans } from '@/helpers/useTrans';
-import { Brand } from '@/types/types';
+import type { Brand } from '@/types/types';
 
 interface BrandsProps {
     brands: Brand[];

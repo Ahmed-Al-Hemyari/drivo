@@ -1,9 +1,6 @@
 import { Link } from '@inertiajs/react';
-import AppLogoIcon from '@/components/app-logo-icon';
 import { home } from '@/routes';
 import type { AuthLayoutProps } from '@/types';
-import { LanguageSwitcher } from '@/components/drivo-components/language-switcher';
-import ThemeSwitcher from '@/components/drivo-components/theme-switcher';
 
 export default function AuthSimpleLayout({
     children,

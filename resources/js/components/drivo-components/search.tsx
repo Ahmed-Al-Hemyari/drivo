@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
 import { router, usePage } from '@inertiajs/react';
+import React, { useState, useEffect } from 'react';
 import { useTrans } from '@/helpers/useTrans';
 
 interface SearchProps { route: string; }
@@ -12,20 +12,27 @@ const Search: React.FC<SearchProps> = ({ route }) => {
     if (typeof window !== 'undefined') {
       return new URLSearchParams(window.location.search).get('search') || '';
     }
+
     return '';
   };
 
   const [searchQuery, setSearchQuery] = useState<string>(getInitialSearch);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSearchQuery(new URLSearchParams(window.location.search).get('search') || '');
   }, [page.url]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams(window.location.search);
-    if (searchQuery.trim()) params.set('search', searchQuery.trim());
-    else params.delete('search');
+
+    if (searchQuery.trim()) {
+params.set('search', searchQuery.trim());
+} else {
+params.delete('search');
+}
+
     router.get(`/${route}`, Object.fromEntries(params.entries()), { preserveScroll: true, replace: true });
   };
 

@@ -1,7 +1,7 @@
+import { Link } from '@inertiajs/react';
 import React from 'react';
-import { Link, usePage } from '@inertiajs/react';
 import { useTrans } from '@/helpers/useTrans';
-import { LinkItem } from '@/types/types';
+import type { LinkItem } from '@/types/types';
 
 interface PaginationProps {
   links: LinkItem[];
@@ -9,11 +9,20 @@ interface PaginationProps {
 
 export function Pagination({ links }: PaginationProps) {
   const { __ } = useTrans();
-  if (!links || links.length <= 3) return null;
+
+  if (!links || links.length <= 3) {
+return null;
+}
 
   const cleanLabel = (label: string) => {
-    if (label.includes('Previous')) return __('Previous');
-    if (label.includes('Next')) return __('Next');
+    if (label.includes('Previous')) {
+return __('Previous');
+}
+
+    if (label.includes('Next')) {
+return __('Next');
+}
+
     return label;
   };
 

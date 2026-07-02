@@ -1,11 +1,10 @@
 import React from 'react';
 import CarCard from '@/components/drivo-components/car-card';
 import Filter from '@/components/drivo-components/filter';
-import Navbar from '@/components/drivo-components/navbar';
 import { Pagination } from '@/components/drivo-components/pagination';
 import Search from '@/components/drivo-components/search';
 import { useTrans } from '@/helpers/useTrans';
-import { Brand, Car, Category, LinkItem } from '@/types/types';
+import type { Brand, Car, Category, LinkItem } from '@/types/types';
 
 interface LaravelPagination<T> {
   data: T[];

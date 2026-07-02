@@ -1,6 +1,6 @@
 import { Link, usePage } from '@inertiajs/react';
 import { useTrans } from '@/helpers/useTrans';
-import { Category } from '@/types/types';
+import type { Category } from '@/types/types';
 
 interface CategoriesProps {
     categories: Category[];

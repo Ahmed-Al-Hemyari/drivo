@@ -1,6 +1,4 @@
 import React from 'react';
-import { usePage } from '@inertiajs/react';
-import Navbar from '@/components/drivo-components/navbar';
 import { useTrans } from '@/helpers/useTrans';
 
 const About: React.FC = () => {

@@ -1,9 +1,8 @@
+import { Head } from '@inertiajs/react';
 import React from 'react';
-import { Head, usePage } from '@inertiajs/react';
-import Navbar from '@/components/drivo-components/navbar';
-import BookingCard from '@/components/drivo-components/booking-card'; // Adjust path if needed
+import BookingCard from '@/components/drivo-components/booking-card';
 import { useTrans } from '@/helpers/useTrans';
-import { Booking } from '@/types/types';
+import type { Booking } from '@/types/types';
 
 interface Props {
   bookings: Booking[];
