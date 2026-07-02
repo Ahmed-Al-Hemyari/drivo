@@ -66,8 +66,8 @@ export type Booking = {
     title: string;
     duration: number;
     amount: number;
-    VAT: number;
-    total_amount_with_VAT: number;
+    vat: number;
+    total_amount_with_vat: number;
     total_paid: number;
     total_remaining: number;
 

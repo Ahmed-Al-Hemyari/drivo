@@ -4,7 +4,7 @@ import { useTrans } from '@/helpers/useTrans';
 import { Booking } from '@/types/types';
 
 interface Props {
-  booking: Booking;
+  booking: Booking
 }
 
 const BookingCard: React.FC<Props> = ({ booking }) => {
@@ -12,17 +12,14 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
   const locale = (usePage().props.locale as 'en' | 'ar') || 'en';
   const [isProcessing, setIsProcessing] = useState(false);
 
-  // Isolate current English state key for conditional capability checking
   const statusKey = useMemo(() => {
     return (booking.booking_status?.name_en || '').toLowerCase();
   }, [booking.booking_status]);
 
-  // Determine if a booking can be cancelled
   const canBeCancelled = useMemo(() => {
     return ['pending', 'confirmed'].includes(statusKey);
   }, [statusKey]);
 
-  // Handle image mapping securely
   const carImage = useMemo(() => {
     if (booking.car?.images && booking.car.images.length > 0) {
       return `/storage/${booking.car.images[0]}`;
@@ -30,7 +27,11 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
     return '/images/no-image-car.svg';
   }, [booking.car?.images]);
 
-  // Format localized dates nicely
+  const formatMoney = (value?: number | string) => {
+    const num = parseFloat(String(value || 0)).toFixed(2);
+    return locale === 'ar' ? `ر ${num}` : `${num} SAR`;
+  };
+
   const formatDate = (dateString?: string) => {
     if (!dateString) return '—';
     const d = new Date(dateString);
@@ -41,7 +42,6 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
     });
   };
 
-  // Cancel processing logic
   const handleCancel = (e: React.FormEvent) => {
     e.preventDefault();
     if (!confirm(__('Are you sure you want to cancel this booking?'))) return;
@@ -52,87 +52,122 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
       onFinish: () => setIsProcessing(false),
     });
   };
-  console.log(statusKey);
-  console.log(!booking.rated);
+
   return (
-    <div className="flex flex-col md:flex-row justify-between bg-base-100 border border-base-200 hover:shadow-md transition-all duration-300 rounded-2xl p-4 w-full mx-auto my-3 gap-4">
+    <div className="bg-base-100 border border-base-200/60 rounded-2xl p-6 w-full mx-auto my-4 transition-all duration-300 hover:shadow-md">
 
-      {/* Left Segment: Car Graphics and Detailed Booking Specs */}
-      <div className="flex flex-col sm:flex-row items-center w-full gap-4">
-
-        {/* Car Image Thumbnail Block */}
-        <div className="shrink-0 relative w-32 h-24 rounded-xl overflow-hidden bg-base-200 border border-base-200">
-          <img
-            className="w-full h-full object-cover"
-            src={carImage}
-            alt={booking.car?.full_name || 'Car'}
-            onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-car.svg'; }}
-          />
+      {/* Top Header Row: Booking ID & Status Badge */}
+      <div className="flex justify-between items-center border-b border-base-200/50 pb-4 mb-5">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-bold text-base-content/40 uppercase tracking-wider">{__('Booking')}</span>
+          <span className="text-sm font-black text-(--color-primary-color)">#{booking.id}</span>
         </div>
+        <span
+          className="capitalize py-1 px-3 rounded-full text-[11px] font-bold shadow-xs border border-black/5"
+          style={{
+            backgroundColor: booking.booking_status?.background_color || 'var(--fallback-b2)',
+            color: booking.booking_status?.font_color || 'var(--fallback-bc)',
+          }}
+        >
+          {booking.booking_status?.[`name_${locale}`]}
+        </span>
+      </div>
 
-        {/* Core Metadata Specifications Output */}
-        <div className="flex flex-col justify-between text-center sm:text-left rtl:sm:text-right space-y-2 w-full sm:w-auto">
-          <h1 className="text-md font-bold text-base-content/60">
-            {__('Booking')} <span className="text-(--color-primary-color)">#{booking.id}</span>
-          </h1>
+      {/* Main Structural Body */}
+      <div className="flex flex-col lg:flex-row justify-between gap-6">
 
-          <h2 className="text-xl font-black text-base-content">
-                {booking.car?.full_name}{' '}
-            <span className="text-base-content/50 text-xs font-medium block sm:inline">
-              ({booking.car?.category?.[`name_${locale}`]})
-            </span>
-          </h2>
-
-          {/* Dynamic Status Capsule fueled by DB Columns */}
-          <div>
-            <span
-              className="inline-block capitalize py-0.5 px-3 rounded-full text-xs font-bold shadow-xs border border-black/5"
-              style={{
-                backgroundColor: booking.booking_status?.background_color || 'var(--fallback-b2)',
-                color: booking.booking_status?.font_color || 'var(--fallback-bc)',
-              }}
-            >
-              {booking.booking_status?.[`name_${locale}`]}
-            </span>
+        {/* Left Section: Car Info & Dates */}
+        <div className="flex gap-4 items-start flex-1">
+          <div className="shrink-0 w-24 h-20 sm:w-28 sm:h-24 rounded-xl overflow-hidden bg-base-200 border border-base-200">
+            <img
+              className="w-full h-full object-cover"
+              src={carImage}
+              alt={booking.car?.full_name || 'Car'}
+              onError={(e) => { (e.target as HTMLImageElement).src = '/images/no-image-car.svg'; }}
+            />
           </div>
 
-          <p className="text-xs text-base-content/70 font-semibold">
-            <span className="text-base-content/40 font-medium">{__('From')}:</span> {formatDate(booking.start_date)}{' '}
-            <span className="mx-1 text-base-content/30">–</span>{' '}
-            <span className="text-base-content/40 font-medium">{__('To')}:</span> {formatDate(booking.end_date)}
-          </p>
+          <div className="space-y-1.5 text-start">
+            <h2 className="text-xl font-black text-base-content tracking-tight">
+              {booking.car?.full_name}
+              <span className="text-base-content/40 text-xs font-medium block sm:inline sm:ms-2">
+                ({booking.car?.category?.[`name_${locale}`]})
+              </span>
+            </h2>
+
+            <div className="text-xs text-base-content/60 font-medium space-y-0.5">
+              <p>
+                <span className="text-base-content/40 font-normal">{__('From')}:</span> {formatDate(booking.start_date)}
+              </p>
+              <p>
+                <span className="text-base-content/40 font-normal">{__('To')}:</span> {formatDate(booking.end_date)}
+              </p>
+            </div>
+
+            <div className="pt-1">
+              <span className="badge badge-sm bg-base-200 border-none text-base-content/70 font-bold rounded-md px-2 py-2.5">
+                {booking.duration} {__('Days')}
+              </span>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Right Segment: Context-Driven Execution Actions Layout */}
-      <div className="flex sm:flex-row md:flex-col items-center justify-center gap-2 shrink-0 border-t border-base-200 pt-3 md:pt-0 md:border-t-0">
-        {canBeCancelled ? (
-          <form onSubmit={handleCancel} className="w-full sm:w-auto">
-            <button
-              type="submit"
-              disabled={isProcessing}
-              className="btn btn-warning btn-sm text-white font-bold rounded-xl px-5 normal-case w-full transition-all active:scale-98 disabled:opacity-50"
-            >
-              {isProcessing ? <span className="loading loading-spinner loading-xs"></span> : __('Cancel')}
-            </button>
-          </form>
-        ) : statusKey == 'completed' && !booking.rated? (
-          <Link
-            href={`/bookings/${booking.id}/rate`}
-            className="btn bg-(--color-primary-color) hover:bg-(--color-primary-hover) border-none btn-sm text-white font-bold rounded-xl px-5 normal-case w-full sm:w-auto transition-all active:scale-98"
-          >
-            {__('Rate')}
-          </Link>
-        ) : (
-          <button
-            className="btn btn-sm bg-base-300 text-base-content/40 border-none rounded-xl px-5 normal-case cursor-not-allowed w-full sm:w-auto"
-            disabled
-          >
-            {__('Cancel')}
-          </button>
-        )}
-      </div>
+        {/* Right Section: Compact Clean Invoice Table */}
+        <div className="w-full lg:w-72 border-t lg:border-t-0 lg:border-s border-base-200/60 pt-4 lg:pt-0 lg:ps-6 flex flex-col justify-between gap-4">
+          <div className="space-y-2 text-sm font-medium text-base-content/70">
+            <div className="flex justify-between">
+              <span>{__('Amount')}</span>
+              <span className="text-base-content font-semibold">${(booking.amount)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>{__('VAT')}</span>
+              <span className="text-base-content font-semibold">${(booking.vat)}</span>
+            </div>
+            <div className="flex justify-between border-t border-base-200/40 pt-1.5">
+              <span>{__('Total Amount With VAT')}</span>
+              <span className="text-base-content font-bold">${(booking.total_amount_with_vat)}</span>
+            </div>
+            <div className="flex justify-between text-success">
+              <span>{__('Total Paid')}</span>
+              <span className="font-bold">${(booking.total_paid)}</span>
+            </div>
+            <div className="flex justify-between border-t border-base-200/40 pt-1.5 text-warning font-bold bg-base-200/30 px-2 py-1.5 rounded-lg mt-1">
+              <span>{__('Total Remaining')}</span>
+              <span className="text-md font-black">${(booking.total_remaining)}</span>
+            </div>
+          </div>
 
+          {/* Bottom Call-to-Action Buttons */}
+          <div className="w-full pt-1">
+            {canBeCancelled ? (
+              <form onSubmit={handleCancel} className="w-full">
+                <button
+                  type="submit"
+                  disabled={isProcessing}
+                  className="btn btn-warning btn-sm border-none text-white font-bold rounded-xl w-full h-9 min-h-0 normal-case transition-all active:scale-98 disabled:opacity-50"
+                >
+                  {isProcessing ? <span className="loading loading-spinner loading-xs"></span> : __('Cancel')}
+                </button>
+              </form>
+            ) : statusKey === 'completed' && !booking.rated ? (
+              <Link
+                href={`/bookings/${booking.id}/rate`}
+                className="btn bg-(--color-primary-color) hover:bg-(--color-primary-hover) border-none btn-sm text-white font-bold rounded-xl w-full h-9 min-h-0 normal-case text-center flex items-center justify-center transition-all active:scale-98"
+              >
+                <i className="fa-regular fa-star text-xs me-1"></i> {__('Rate')}
+              </Link>
+            ) : (
+              <button
+                className="btn btn-sm bg-base-200 text-base-content/30 border-none rounded-xl w-full h-9 min-h-0 normal-case cursor-not-allowed font-bold"
+                disabled
+              >
+                {__('Locked')}
+              </button>
+            )}
+          </div>
+        </div>
+
+      </div>
     </div>
   );
 };

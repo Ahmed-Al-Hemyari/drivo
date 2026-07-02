@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Car;
+use App\Models\GeneralSetting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -23,7 +24,8 @@ class BookingController extends Controller
     public function create(Car $car)
     {
         return Inertia::render('bookings/create-booking', [
-            'car' => $car->load(['brand', 'category'])
+            'car' => $car->load(['brand', 'category']),
+            'vat' => (float) GeneralSetting::query()->where('key', 'VAT_percentage')->value('value') ?? 0
         ]);
     }
 

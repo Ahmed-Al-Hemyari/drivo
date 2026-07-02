@@ -46,7 +46,7 @@ const Hero: React.FC = () => {
                         <img
                             src='/images/hero-car.png'
                             alt={__("Featured car")}
-                            className="w-full h-auto object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_25px_25px_rgba(0,0,0,0.6)] select-none pointer-events-none hover:scale-103 transition-transform duration-500"
+                            className="w-full h-auto object-contain drop-shadow-[0_25px_25px_rgba(0,0,0,0.15)] dark:drop-shadow-[0_25px_25px_rgba(0,0,0,0.6)] select-none pointer-events-none rtl:scale-x-[-1] hover:scale-105"
                         />
                         {/* Realistic under-car responsive floor shadow layer */}
                         <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[85%] h-4 bg-black/10 dark:bg-black/40 rounded-full blur-md -z-10" />

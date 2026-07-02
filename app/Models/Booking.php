@@ -61,6 +61,16 @@ class Booking extends Model
         );
     }
 
+    protected $appends = [
+        'title',
+        'duration',
+        'amount',
+        'vat',
+        'total_amount_with_vat',
+        'total_paid',
+        'total_remaining'
+    ];
+
     public function duration(): Attribute
     {
         return Attribute::make(
@@ -93,7 +103,7 @@ class Booking extends Model
         );
     }
 
-    public function VAT(): Attribute
+    public function vat(): Attribute
     {
         return Attribute::make(
             get: function () {
@@ -112,7 +122,7 @@ class Booking extends Model
         );
     }
 
-    public function totalAmountWithVAT(): Attribute
+    public function totalAmountWithVat(): Attribute
     {
         return Attribute::make(
             get: function () {

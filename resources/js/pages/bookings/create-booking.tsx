@@ -7,19 +7,18 @@ import { User } from '@/types';
 
 interface Props {
   car: Car;
+  vat: number;
 }
 
-const CreateBooking: React.FC<Props> = ({ car }) => {
+const CreateBooking: React.FC<Props> = ({ car, vat }) => {
   const { __ } = useTrans();
   const locale = (usePage().props.locale as 'en' | 'ar') || 'en';
   const user = usePage().props.auth.user as User;
 
   // Initialize the Inertia form context hook
   const { data, setData, post, processing, errors } = useForm({
-    user_id: user.id,
     start_date: '',
     end_date: '',
-    total_price: 0,
     notes: '',
   });
 
@@ -42,14 +41,17 @@ const CreateBooking: React.FC<Props> = ({ car }) => {
   }, [data.start_date, data.end_date]);
 
   // Compute price total
-  const computedTotalPrice = useMemo(() => {
+  const computedTotalAmount = useMemo(() => {
     return rentalDuration * (car?.daily_price || 0);
   }, [rentalDuration, car?.daily_price]);
 
-  // Keep form data state fully synced with total price calculations
-  useEffect(() => {
-    setData('total_price', computedTotalPrice);
-  }, [computedTotalPrice]);
+  const computedVAT = useMemo(() => {
+    return vat * computedTotalAmount;
+  }, [rentalDuration, car?.daily_price]);
+
+  const computedTotalAmountWithVAT = useMemo(() => {
+    return computedVAT + computedTotalAmount;
+  }, [rentalDuration, car?.daily_price]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -157,9 +159,21 @@ const CreateBooking: React.FC<Props> = ({ car }) => {
               </div>
 
               <div className="flex justify-between items-center text-base font-bold text-base-content border-t border-base-300 pt-2.5 mt-1">
-                <span>{__('Total Price')}:</span>
+                <span>{__('Amount')}:</span>
                 <span className="text-(--color-primary-color) text-lg font-black">
-                  ${data.total_price}
+                  ${computedTotalAmount}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-base font-bold text-base-content border-t border-base-300 pt-2.5 mt-1">
+                <span>{__('VAT')}:</span>
+                <span className="text-(--color-primary-color) text-lg font-black">
+                  ${computedVAT}
+                </span>
+              </div>
+              <div className="flex justify-between items-center text-base font-bold text-base-content border-t border-base-300 pt-2.5 mt-1">
+                <span>{__('Total Amount With VAT')}:</span>
+                <span className="text-(--color-primary-color) text-lg font-black">
+                  ${computedTotalAmountWithVAT}
                 </span>
               </div>
             </div>

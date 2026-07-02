@@ -185,7 +185,7 @@ const CarShow: React.FC<Props> = ({ car }) => {
                       </span>
                     </div>
                     <p className="text-sm text-base-content/70 leading-relaxed text-left rtl:text-right">
-                      {review.comment}
+                      {review.comment ?? '-'}
                     </p>
                   </div>
                 </div>
