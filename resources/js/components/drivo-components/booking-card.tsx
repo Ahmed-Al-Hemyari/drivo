@@ -52,7 +52,8 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
       onFinish: () => setIsProcessing(false),
     });
   };
-
+  console.log(statusKey);
+  console.log(!booking.rated);
   return (
     <div className="flex flex-col md:flex-row justify-between bg-base-100 border border-base-200 hover:shadow-md transition-all duration-300 rounded-2xl p-4 w-full mx-auto my-3 gap-4">
 
@@ -115,9 +116,9 @@ const BookingCard: React.FC<Props> = ({ booking }) => {
               {isProcessing ? <span className="loading loading-spinner loading-xs"></span> : __('Cancel')}
             </button>
           </form>
-        ) : statusKey === 'completed' && booking.rated === false ? (
+        ) : statusKey == 'completed' && !booking.rated? (
           <Link
-            href={`/rates/${booking.id}`}
+            href={`/bookings/${booking.id}/rate`}
             className="btn bg-(--color-primary-color) hover:bg-(--color-primary-hover) border-none btn-sm text-white font-bold rounded-xl px-5 normal-case w-full sm:w-auto transition-all active:scale-98"
           >
             {__('Rate')}

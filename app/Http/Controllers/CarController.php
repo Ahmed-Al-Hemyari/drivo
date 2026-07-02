@@ -32,7 +32,8 @@ class CarController extends Controller
 
     public function show(Car $car)
     {
-        $car->load(['brand', 'category', 'bookings', 'bookings.review']);
+        $car->load(['brand', 'category', 'bookings.review.user']);
+        $car->reviews = $car->bookings->pluck('review')->filter()->values();
 
         return Inertia::render('cars/car-show', [
             'car' => $car,

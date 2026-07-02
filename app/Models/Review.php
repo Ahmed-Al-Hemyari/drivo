@@ -19,6 +19,13 @@ class Review extends Model
 
     public function user()
     {
-        return $this->booking()->user;
+        return $this->hasOneThrough(
+            User::class,
+            Booking::class,
+            'id',
+            'id',
+            'booking_id',
+            'user_id'
+        );
     }
 }

@@ -29,6 +29,7 @@
     "Ride": "انطلق",
     "Repeat": "كرر",
     "Explore Cars →": "استكشف السيارات ←",
+    "Explore Cars": "استكشف السيارات",
     "Insurance & Safety": "التأمين والسلامة",
     "Drive with confidence — coverage included.": "قُد بثقة — التغطية التأمينية مشمولة.",
     "Eco-Friendly Options": "خيارات صديقة للبيئة",
@@ -168,6 +169,8 @@
     "Booking No.": "الحجز رقم",
     "Booking History": "تاريخ الحجوزات",
     "Manage your rental requests, active reservations, and status timelines.": "إدارة طلبات التأجير، والحجوزات النشطة، والخطوط الزمنية للحالة.",
+    "No bookings found": "لا توجد حجوزات",
+    "You haven't requested or reserved any vehicles yet.": "لم تقم بأي طلبات أو حجوزات للسيارات حتى الآن",
 
     "Booking Statuses": "حالات الحجوزات",
     "Booking Status": "حالة الحجز",
@@ -179,6 +182,13 @@
     "Review": "المراجعة",
     "Comments": "التعليقات",
     "Comment": "التعليق",
+    "Rate Your Experience": "قيم تجربتك",
+    "How was your trip?":"كيف كانت رحلتك؟",
+    "Your feedback helps us make every drive better.": "تقييمك يساعدنا على تقديم تجربة أفضل",
+    "Your Rating": "تقييمك",
+    "Share more details (Optional)": "شاركنا المزيد من التفاصيل (اختياري)",
+    "Write your review here...": "اكتب مراجعتك هنا...",
+    "Submit Review": "إرسال المراجعة",
 
     "Money Transactions": "العمليات المالية",
     "Money Transaction": "العملية المالية",
@@ -218,5 +228,6 @@
     "Request submitted successfully!": "تم إرسال الطلب بنجاح",
     "This booking cannot be cancelled": "لا يمكن إلغاء هذا الطلب حالياً",
     "Booking cancelled successfully!": "تم إلغاء الطلب بنجاح",
-    "Booking deleted successfully!": "تم حذف الطلب بنجاح"
+    "Booking deleted successfully!": "تم حذف الطلب بنجاح",
+    "Thank you for rating": "شكراً لك على التقييم"
 }

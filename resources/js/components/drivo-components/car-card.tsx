@@ -16,46 +16,48 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
     const carCategory = car.category?.[`name_${locale}`] || '';
 
     return (
-        <div className="card bg-base-100 shadow-sm hover:shadow-xl transition-all duration-300 border border-base-200 w-full max-w-md mx-auto group/card overflow-hidden">
-            {/* Image Wrapper */}
-            <figure className="relative h-56 overflow-hidden bg-base-200">
-                <img
-                    src={car.images ? `/storage/${car.images[0]}` : '/images/no-image-car.svg'}
-                    alt={`${carBrand} ${carName}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
-                />
-                {carCategory && (
-                    <span className="badge bg-slate-900 text-white border-none absolute top-4 right-4 shadow-sm font-medium">
-                        {carCategory}
+        <Link href={`/cars/${car.id}`}>
+            <div className="card bg-base-100 shadow-sm hover:shadow-xl transition-all duration-300 border border-base-200 w-full max-w-md mx-auto group/card overflow-hidden">
+                {/* Image Wrapper */}
+                <figure className="relative h-56 overflow-hidden bg-base-200">
+                    <img
+                        src={car.images ? `/storage/${car.images[0]}` : '/images/no-image-car.svg'}
+                        alt={`${carBrand} ${carName}`}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
+                    />
+                    {carCategory && (
+                        <span className="badge bg-slate-900 px-1 text-white border-none absolute top-4 right-4 shadow-sm font-medium">
+                            {carCategory}
+                        </span>
+                    )}
+                    <span className={`badge ${car.is_available ? 'bg-emerald-700 text-white' : 'bg-rose-700 text-white'} px-1 border-none absolute top-4 left-4 shadow-sm font-medium`}>
+                        {car.is_available ? __('Available') : __('Unavailable')}
                     </span>
-                )}
-                <span className={`badge ${car.is_available ? 'bg-emerald-700 text-white' : 'bg-rose-700 text-white'} border-none absolute top-4 left-4 shadow-sm font-medium`}>
-                    {car.is_available ? __('Available') : __('Unavailable')}
-                </span>
-            </figure>
+                </figure>
 
-            {/* Content Body */}
-            <div className="card-body p-6 gap-5 text-center items-center">
-                <div>
-                    <h2 className="card-title text-xl font-bold text-base-content justify-center group-hover/card:text-(--color-primary-color) transition-colors">
-                        {car.full_name}
-                    </h2>
-                </div>
+                {/* Content Body */}
+                <div className="card-body p-6 gap-5 text-center items-center">
+                    <div>
+                        <h2 className="card-title text-xl font-bold text-base-content justify-center group-hover/card:text-(--color-primary-color) transition-colors">
+                            {car.full_name}
+                        </h2>
+                    </div>
 
-                <div className="w-full">
-                    <RatingAndPrice car={car} __={__} />
-                </div>
+                    <div className="w-full">
+                        <RatingAndPrice car={car} __={__} />
+                    </div>
 
-                <div className="card-actions w-full mt-2">
-                    <Link
-                        className="btn border-none w-full bg-(--color-primary-color) text-white hover:bg-(--color-primary-hover) transition-all duration-200 normal-case text-base shadow-sm"
-                        href={`/cars/${car.id}`}
-                    >
-                        {__("Rent")}
-                    </Link>
+                    <div className="card-actions w-full mt-2">
+                        <Link
+                            className="btn border-none w-full bg-(--color-primary-color) text-white hover:bg-(--color-primary-hover) transition-all duration-200 normal-case text-base shadow-sm"
+                            href={`/cars/${car.id}`}
+                        >
+                            {__("Rent")}
+                        </Link>
+                    </div>
                 </div>
             </div>
-        </div>
+        </Link>
     );
 };
 

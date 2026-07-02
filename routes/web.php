@@ -25,8 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/bookings/delete/{booking}', [BookingController::class, 'delete'])->name('bookings.delete');
 
     // Rate
-    Route::get('/rates/{booking}', [ReviewController::class, 'create'])->name('bookings.create');
-    Route::post('/rates/{booking}', [ReviewController::class, 'store'])->name('bookings.store');
+    Route::get('bookings/{booking}/rate', [ReviewController::class, 'create'])->name('bookings.create');
+    Route::post('bookings/{booking}/rate', [ReviewController::class, 'store'])->name('bookings.store');
 
     // Profile
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
