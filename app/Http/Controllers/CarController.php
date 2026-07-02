@@ -16,7 +16,7 @@ class CarController extends Controller
 
         $cars = Car::with(['brand', 'category'])
             ->filter($filters)
-            ->paginate(4)
+            ->paginate(12)
             ->withQueryString();
 
         $brands = Brand::orderBy('name_en', 'asc')->get(['id', 'name_en', 'name_ar']);
