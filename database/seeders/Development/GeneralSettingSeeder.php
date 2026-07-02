@@ -74,12 +74,6 @@ class GeneralSettingSeeder extends Seeder
                 'is_published' => true
             ],
             [
-                'key' => 'primary_color',
-                'value' => '#FF5A00',
-                'value_ar' => '#FF5A00',
-                'is_published' => true
-            ],
-            [
                 'key' => 'VAT_percentage',
                 'value' => '0.15',
                 'value_ar' => '0.15',

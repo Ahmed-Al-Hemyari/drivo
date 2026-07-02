@@ -34,7 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->login()
             ->brandName('Drivo')
             ->colors([
-                'primary' => GeneralSetting::query()->where('key', 'primary_color')->value('value') ?? Color::Amber,
+                'primary' => '#FF5A00',
                 'gray'    => Color::Zinc,
             ])
             ->font('Cairo')
