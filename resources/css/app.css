@@ -174,7 +174,7 @@
 }
 
 .custom-drivo-calendar .react-calendar__navigation button {
-  color: var(--fallback-bc, initial);
+  color: hsl(var(--bc) / var(--tw-text-opacity, 1)) !important;
   font-weight: 700;
   border-radius: 0.5rem;
   min-width: 44px;
